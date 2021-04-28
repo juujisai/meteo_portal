@@ -22,12 +22,45 @@ const MapCont = () => {
     layerCap: true,
   })
 
+
+
+  const getValuesFromVector = ({ layer, cell }) => {
+
+    layer.getSource().addEventListener('change', function (e) {
+      const source = e.target
+      let featuresValue = []
+
+
+      if (source.getState() === 'ready') {
+        let features = e.target.getFeatures()
+        features.forEach(item => featuresValue = [...featuresValue, item.get(cell)])
+
+        console.log(featuresValue)
+
+        return featuresValue
+        // setListOfCapitals(featuresValue)
+      }
+
+    })
+
+    return []
+  }
+
+
+
+
+
+
+
+
+
+
   React.useEffect(() => {
 
     const map = new Map({
       target: 'map',
       view: new View({
-        projection: 'EPSG:4326',
+        projection: 'EPSG:3857',
         center: [0, 0],
         zoom: 0
       })
@@ -77,20 +110,25 @@ const MapCont = () => {
     map.addLayer(layerGroup)
 
 
-    // let xC = (2687896.2767138490453362 + 1572152.3511472388636321) / 2
-    // let yC = (6275208.6524272579699755 + 7330182.4313131291419268) / 2
-    // map.getView().setCenter([xC, yC])
-
-    // map.getView().fit(
-    //   [1572152.3511472388636321, 6275208.6524272579699755, 2687896.2767138490453362, 7330182.4313131291419268]
-    //   , {
-    //     padding: [100, 100, 100, 100]
-    //   })
+    map.getView().fit(
+      [1572152.3511472388636321, 6275208.6524272579699755, 2687896.2767138490453362, 7330182.4313131291419268]
+      , {
+        padding: [10, 10, 10, 10]
+      })
 
 
-    // map.getView().fit(layerWojew.getSource())
 
-    console.log(layerCapitals.getSource().getExtent())
+    getValuesFromVector({ layer: layerCapitals, cell: 'naz_glowna' })
+
+
+    map.on('click', function (e) {
+      // map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
+      //   console.log(feature.get('JPT_NAZWA_'))
+      // })
+
+
+      console.log(e.coordinate)
+    })
 
 
   })
