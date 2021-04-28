@@ -1,0 +1,25 @@
+{
+"type": "FeatureCollection",
+"name": "stolice_wgs84",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "naz_glowna": "Poznań", "woj": "wielkopolskie", "powiat": "Poznań" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 1885024.978957162005827, 6874221.076527650468051 ], [ 1885024.978957162005827, 6874221.076527650468051 ] ] } },
+{ "type": "Feature", "properties": { "naz_glowna": "Łódź", "woj": "łódzkie", "powiat": "Łódź" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 2166617.426766543183476, 6757645.541315761394799 ], [ 2166617.426766543183476, 6757645.541315761394799 ] ] } },
+{ "type": "Feature", "properties": { "naz_glowna": "Zielona Góra", "woj": "lubuskie", "powiat": "Zielona Góra" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 1725877.378279691562057, 6789132.459766369313002 ], [ 1725877.378279691562057, 6789132.459766369313002 ] ] } },
+{ "type": "Feature", "properties": { "naz_glowna": "Białystok", "woj": "podlaskie", "powiat": "Białystok" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 2578499.557720530312508, 7007544.544352663680911 ], [ 2578499.557720530312508, 7007544.544352663680911 ] ] } },
+{ "type": "Feature", "properties": { "naz_glowna": "Kielce", "woj": "świętokrzyskie", "powiat": "Kielce" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 2296687.34368242463097, 6598636.828633299097419 ], [ 2296687.34368242463097, 6598636.828633299097419 ] ] } },
+{ "type": "Feature", "properties": { "naz_glowna": "Wrocław", "woj": "dolnośląskie", "powiat": "Wrocław" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 1895991.022358723217621, 6640771.091975366696715 ], [ 1895991.022358723217621, 6640771.091975366696715 ] ] } },
+{ "type": "Feature", "properties": { "naz_glowna": "Szczecin", "woj": "zachodniopomorskie", "powiat": "Szczecin" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 1619337.884539728052914, 7063274.734662609174848 ], [ 1619337.884539728052914, 7063274.734662609174848 ] ] } },
+{ "type": "Feature", "properties": { "naz_glowna": "Gorzów Wielkopolski", "woj": "lubuskie", "powiat": "Gorzów Wielkopolski" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 1696440.938121518353, 6933564.970530953258276 ], [ 1696440.938121518353, 6933564.970530953258276 ] ] } },
+{ "type": "Feature", "properties": { "naz_glowna": "Lublin", "woj": "lubelskie", "powiat": "Lublin" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 2512262.04508688300848, 6665260.024166035465896 ], [ 2512262.04508688300848, 6665260.024166035465896 ] ] } },
+{ "type": "Feature", "properties": { "naz_glowna": "Katowice", "woj": "śląskie", "powiat": "Katowice" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 2116554.5879882927984, 6491377.242584792897105 ], [ 2116554.5879882927984, 6491377.242584792897105 ] ] } },
+{ "type": "Feature", "properties": { "naz_glowna": "Opole", "woj": "opolskie", "powiat": "Opole" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 1995099.292073306627572, 6562886.99649309553206 ], [ 1995099.292073306627572, 6562886.99649309553206 ] ] } },
+{ "type": "Feature", "properties": { "naz_glowna": "Warszawa", "woj": "mazowieckie", "powiat": "Warszawa" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 2338451.443621041253209, 6842173.12259367108345 ], [ 2338451.443621041253209, 6842173.12259367108345 ] ] } },
+{ "type": "Feature", "properties": { "naz_glowna": "Gdańsk", "woj": "pomorskie", "powiat": "Gdańsk" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 2076510.482521561672911, 7236669.704746036790311 ], [ 2076510.482521561672911, 7236669.704746036790311 ] ] } },
+{ "type": "Feature", "properties": { "naz_glowna": "Toruń", "woj": "kujawsko-pomorskie", "powiat": "Toruń" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 2071173.319727251073346, 6985394.277489049360156 ], [ 2071173.319727251073346, 6985394.277489049360156 ] ] } },
+{ "type": "Feature", "properties": { "naz_glowna": "Rzeszów", "woj": "podkarpackie", "powiat": "Rzeszów" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 2448933.310124425683171, 6453397.515151016414165 ], [ 2448933.310124425683171, 6453397.515151016414165 ] ] } },
+{ "type": "Feature", "properties": { "naz_glowna": "Kraków", "woj": "małopolskie", "powiat": "Kraków" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 2219417.844313945155591, 6456982.138900998979807 ], [ 2219417.844313945155591, 6456982.138900998979807 ] ] } },
+{ "type": "Feature", "properties": { "naz_glowna": "Bydgoszcz", "woj": "kujawsko-pomorskie", "powiat": "Bydgoszcz" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 2003910.451409165980294, 7006226.235034696757793 ], [ 2003910.451409165980294, 7006226.235034696757793 ] ] } },
+{ "type": "Feature", "properties": { "naz_glowna": "Olsztyn", "woj": "warmińsko-mazurskie", "powiat": "Olsztyn" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 2279819.732168482616544, 7128397.372473163530231 ], [ 2279819.732168482616544, 7128397.372473163530231 ] ] } }
+]
+}
