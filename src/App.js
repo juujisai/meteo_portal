@@ -4,15 +4,28 @@ import React from 'react';
 import MapCont from './layout/Map'
 // import Tools from './layout/Tools'
 
+
+
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './redux/reducer'
+import { initialStore } from './redux/initialStore'
+
+const store = createStore(reducer, initialStore)
+
+
+
 function App() {
   return (
-    <div className="App">
-      {/* <Layers /> */}
-      <MapCont />
-      {/* <Tools /> */}
+    <Provider store={store}>
+      <div className="App">
+        {/* <Layers /> */}
+        <MapCont />
+        {/* <Tools /> */}
 
 
-    </div>
+      </div>
+    </Provider>
   );
 }
 

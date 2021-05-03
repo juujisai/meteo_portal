@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { getForecastForCapitals } from '../redux/actions'
 
 import { Map, View } from 'ol'
 import TileLayer from 'ol/layer/Tile';
@@ -15,7 +17,7 @@ import URLwoj from '../geojson/wojewodztwa_wgs84.geojson'
 import URLcap from '../geojson/stolice_wgs84.geojson'
 
 
-const MapCont = () => {
+const MapCont = ({ forecastCap }) => {
   const [layersVisible, setLayersVisible] = React.useState({
     OSM: true,
     layerWojew: true,
@@ -36,6 +38,8 @@ const MapCont = () => {
         features.forEach(item => featuresValue = [...featuresValue, item.get(cell)])
 
         console.log(featuresValue)
+
+        forecastCap(featuresValue)
 
         return featuresValue
         // setListOfCapitals(featuresValue)
@@ -138,4 +142,13 @@ const MapCont = () => {
   );
 }
 
-export default MapCont;
+const mapStateToProps = (state) => {
+  return { state }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return { forecastCap: (capitals) => dispatch(getForecastForCapitals(capitals)) }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapCont);
