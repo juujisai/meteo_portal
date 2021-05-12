@@ -1,3 +1,4 @@
 export const initialStore = {
-  capitalForecast: []
+  capitalForecast: [],
+  capitals: []
 }

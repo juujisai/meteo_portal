@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { getForecastForCapitals } from '../redux/actions'
+import { getForecastForCapitals, getValuesFromVector } from '../redux/actions'
 
 import { Map, View } from 'ol'
 import TileLayer from 'ol/layer/Tile';
@@ -11,47 +11,33 @@ import VectorSource from 'ol/source/Vector'
 import GeoJSON from 'ol/format/GeoJSON'
 
 import LayerGroup from 'ol/layer/Group'
-
+// import { Style } from 'ol/style'
+// import Icon from 'ol/style/Icon'
+// import Text from 'ol/style/Text'
 
 import URLwoj from '../geojson/wojewodztwa_wgs84.geojson'
 import URLcap from '../geojson/stolice_wgs84.geojson'
 
 
-const MapCont = ({ forecastCap }) => {
-  const [layersVisible, setLayersVisible] = React.useState({
-    OSM: true,
-    layerWojew: true,
-    layerCap: true,
-  })
+const MapCont = ({ capitalForecast, capitals, forecastCap, getValues }) => {
 
 
-
-  const getValuesFromVector = ({ layer, cell }) => {
-
-    layer.getSource().addEventListener('change', function (e) {
-      const source = e.target
-      let featuresValue = []
+  // const capitalStyles = function (feature) {
 
 
-      if (source.getState() === 'ready') {
-        let features = e.target.getFeatures()
-        features.forEach(item => featuresValue = [...featuresValue, item.get(cell)])
+  //   feature.setStyle(new Style({
+  //     image: new Icon({
+  //       src: `http://openweathermap.org/img/wn/10d@2x.png`,
+  //       scale: 1,
+  //     }),
+  //     text: new Text({
+  //       text: 'd',
+  //       offsetY: 10,
+  //       scale: 1.5
+  //     })
+  //   }))
 
-        console.log(featuresValue)
-
-        forecastCap(featuresValue)
-
-        return featuresValue
-        // setListOfCapitals(featuresValue)
-      }
-
-    })
-
-    return []
-  }
-
-
-
+  // }
 
 
 
@@ -72,7 +58,7 @@ const MapCont = ({ forecastCap }) => {
     // Open Street Map base map
     const layerOSM = new TileLayer({
       source: new OSM(),
-      visible: layersVisible.OSM,
+      visible: true,
       title: 'OSM'
     })
 
@@ -85,7 +71,8 @@ const MapCont = ({ forecastCap }) => {
 
     const layerWojew = new VectorLayer({
       source: layerWojewSource,
-      visible: layersVisible.layerWojew,
+      visible: true,
+      title: 'layerWojew'
     })
 
     // capitals layer
@@ -96,8 +83,8 @@ const MapCont = ({ forecastCap }) => {
         format: new GeoJSON(),
         attributions: 'by BC2020'
       }),
-      visible: layersVisible.layerCap,
-
+      visible: true,
+      title: 'layerCap',
     })
 
 
@@ -122,7 +109,7 @@ const MapCont = ({ forecastCap }) => {
 
 
 
-    getValuesFromVector({ layer: layerCapitals, cell: 'naz_glowna' })
+    getValues({ layer: layerCapitals, cell: 'naz_glowna' })
 
 
     map.on('click', function (e) {
@@ -142,12 +129,15 @@ const MapCont = ({ forecastCap }) => {
   );
 }
 
-const mapStateToProps = (state) => {
-  return { state }
+const mapStateToProps = ({ capitalForecast, capitals }) => {
+  return { capitalForecast, capitals }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return { forecastCap: (capitals) => dispatch(getForecastForCapitals(capitals)) }
+  return {
+    forecastCap: (capitals) => dispatch(getForecastForCapitals(capitals)),
+    getValues: (data) => dispatch(getValuesFromVector(data))
+  }
 }
 
 
