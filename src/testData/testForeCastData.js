@@ -8,7 +8,7 @@ const def = {
       id: 800,
       main: "Clear",
       description: "clear sky",
-      icon: "01d"
+      icon: "11d"
     }
   ],
   base: "stations",

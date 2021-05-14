@@ -26,9 +26,35 @@ function reducer(state, action) {
   if (action.type === GET_VALUES_FROM_VECTOR) {
     const { layer, cell } = action.payload.data
 
+    let forecast = [];
+
+    if (JSON.parse(localStorage.getItem('capitalsForecast')) !== null && JSON.parse(localStorage.getItem('capitalsForecast')).length !== 0) {
+      let temp = JSON.parse(localStorage.getItem('capitalsForecast'))
+      let tempDate = JSON.parse(localStorage.getItem('capitalsForecastTime'))
+
+      let today = new Date().toLocaleDateString()
+      // let today = '15.05.2021'
+
+      if (tempDate !== today) {
+        console.log('dane przestarzałe')
+      } else {
+        console.log('pobieram dane z localstorage')
+        forecast = temp
+      }
+    }
+
+
+
+
+
     layer.getSource().addEventListener('change', function (e) {
       const source = e.target
       let featuresValue = []
+
+
+
+
+
 
 
       if (source.getState() === 'ready' && featuresValue.length === 0) {
@@ -37,18 +63,24 @@ function reducer(state, action) {
 
 
 
-        let forecast = [];
-        featuresValue.forEach(item => {
-          // fetch(`api.openweathermap.org/data/2.5/weather?q={${item}}&appid={${API_KEY}}`)
-          //   .then(response => response.json())
-          //   .then(data => console.log(data))
-          let response = responseZ
 
-          forecast = [...forecast, { name: item.name, forecast: response }]
 
-        })
-        console.log('d')
+        if (forecast.length === 0) {
+          console.log('pobieram dane')
 
+          featuresValue.forEach(item => {
+            // fetch(`api.openweathermap.org/data/2.5/weather?q={${item}}&appid={${API_KEY}}`)
+            //   .then(response => response.json())
+            //   .then(data => console.log(data))
+            let response = responseZ
+
+            forecast = [...forecast, { name: item.name, forecast: response }]
+            localStorage.setItem('capitalsForecast', JSON.stringify(forecast))
+            localStorage.setItem('capitalsForecastTime', JSON.stringify(new Date().toLocaleDateString()))
+
+
+          })
+        }
 
         layer.setStyle(function (feature) {
           let value = forecast
