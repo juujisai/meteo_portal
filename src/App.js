@@ -2,7 +2,7 @@
 import React from 'react';
 // import Layers from './layout/Layers'
 import MapCont from './layout/Map'
-// import Tools from './layout/Tools'
+import Tools from './layout/Tools'
 
 
 
@@ -21,7 +21,7 @@ function App() {
       <div className="App">
         {/* <Layers /> */}
         <MapCont />
-        {/* <Tools /> */}
+        <Tools />
 
 
       </div>
