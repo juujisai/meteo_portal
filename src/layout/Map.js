@@ -15,6 +15,9 @@ import LayerGroup from 'ol/layer/Group'
 // import Icon from 'ol/style/Icon'
 // import Text from 'ol/style/Text'
 
+import { defaults } from 'ol/interaction';
+
+
 import URLwoj from '../geojson/wojewodztwa_wgs84.geojson'
 import URLcap from '../geojson/stolice_wgs84.geojson'
 
@@ -53,6 +56,9 @@ const MapCont = ({ capitalForecast, capitals, forecastCap, getValues }) => {
         projection: 'EPSG:3857',
         center: [0, 0],
         zoom: 0
+      }),
+      interactions: defaults({
+        pinchRotate: false
       })
     })
     // Open Street Map base map

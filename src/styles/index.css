@@ -4,7 +4,64 @@
   box-sizing: border-box;
 }
 
-#map {
+.App {
+  position: relative;
   width: 100%;
   height: 100vh;
+  background-color: rgb(26, 41, 66);
+}
+
+#map {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  /* do zmiany przy innych rozdzielczościach */
+  transform: translate(-50%, -55%);
+  width: 90%;
+  height: 85vh;
+  border: 4px solid white;
+  border-radius: 5%;
+  overflow: hidden;
+}
+
+
+.ol-attribution {
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  padding: 10px 20px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, .5);
+  font-size: .7em;
+}
+
+.ol-attribution ul {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+
+.ol-attribution ul li {
+  margin-right: 15px;
+}
+
+.ol-attribution button {
+  display: none;
+}
+
+.ol-zoom {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ol-zoom button,
+.ol-rotate button {
+  width: 30px;
+  height: 30px;
+  margin: 5px 10px;
+  font-size: 1.5em;
+  background-color: rgba(26, 41, 66, .7);
+  color: white;
 }
