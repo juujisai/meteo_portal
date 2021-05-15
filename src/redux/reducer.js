@@ -1,4 +1,4 @@
-import { GET_FORECAST_FOR_CAPITALS, GET_VALUES_FROM_VECTOR, SHOW_CITY_FORECAST } from './actions'
+import { GET_FORECAST_FOR_CAPITALS, GET_VALUES_FROM_VECTOR, SHOW_CITY_FORECAST, HIDE_FORECAST } from './actions'
 import responseZ from '../testData/testForeCastData'
 
 import { Style } from 'ol/style'
@@ -152,6 +152,11 @@ function reducer(state, action) {
     localStorage.setItem('latestCity', JSON.stringify(city))
 
     return { ...state, isForecastOpen: true, cityForecast, latestCity: city }
+  }
+
+
+  if (action.type === HIDE_FORECAST) {
+    return { ...state, isForecastOpen: false }
   }
 
 

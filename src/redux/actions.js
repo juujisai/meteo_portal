@@ -1,7 +1,7 @@
 export const GET_FORECAST_FOR_CAPITALS = 'GET_FORECAST_FOR_CAPITALS'
 export const GET_VALUES_FROM_VECTOR = 'GET_VALUES_FROM_VECTOR'
 export const SHOW_CITY_FORECAST = 'SHOW_CITY_FORECAST'
-
+export const HIDE_FORECAST = 'HIDE_FORECAST'
 
 
 export const getForecastForCapitals = (capitals) => {
@@ -15,4 +15,8 @@ export const getValuesFromVector = (data) => {
 export const showCityForecast = (city) => {
   return { type: SHOW_CITY_FORECAST, payload: { city } }
 
+}
+
+export const hideForecast = () => {
+  return { type: HIDE_FORECAST }
 }
