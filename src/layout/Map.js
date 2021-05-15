@@ -5,48 +5,23 @@ import { getForecastForCapitals, getValuesFromVector } from '../redux/actions'
 import { Map, View } from 'ol'
 import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector'
+import ImageLayer from 'ol/layer/Image';
 import OSM from 'ol/source/OSM'
-
+import Static from 'ol/source/ImageStatic';
 import VectorSource from 'ol/source/Vector'
 import GeoJSON from 'ol/format/GeoJSON'
+import { Fill, Stroke, Style } from 'ol/style';
 
 import LayerGroup from 'ol/layer/Group'
-// import { Style } from 'ol/style'
-// import Icon from 'ol/style/Icon'
-// import Text from 'ol/style/Text'
 
 import { defaults } from 'ol/interaction';
 
 
 import URLwoj from '../geojson/wojewodztwa_wgs84.geojson'
 import URLcap from '../geojson/stolice_wgs84.geojson'
-
+import hipso from '../images/hipsometria.png'
 
 const MapCont = ({ capitalForecast, capitals, forecastCap, getValues }) => {
-
-
-  // const capitalStyles = function (feature) {
-
-
-  //   feature.setStyle(new Style({
-  //     image: new Icon({
-  //       src: `http://openweathermap.org/img/wn/10d@2x.png`,
-  //       scale: 1,
-  //     }),
-  //     text: new Text({
-  //       text: 'd',
-  //       offsetY: 10,
-  //       scale: 1.5
-  //     })
-  //   }))
-
-  // }
-
-
-
-
-
-
 
   React.useEffect(() => {
 
@@ -67,6 +42,20 @@ const MapCont = ({ capitalForecast, capitals, forecastCap, getValues }) => {
       visible: true,
       title: 'OSM'
     })
+    const layerHipso = new ImageLayer({
+      source: new Static({
+        url: hipso,
+        imageExtent: [1573042.7518, 6276546.6670, 2687776.2614, 7328965.8811
+        ],
+        attributions: 'by BC2020',
+        size: [805, 760]
+      }),
+      visible: true,
+      opacity: .5,
+      title: 'hipso'
+    })
+
+
 
     // wojewodztwa layer
     const layerWojewSource = new VectorSource({
@@ -81,6 +70,17 @@ const MapCont = ({ capitalForecast, capitals, forecastCap, getValues }) => {
       title: 'layerWojew'
     })
 
+    layerWojew.setStyle(new Style({
+      fill: new Fill({
+        color: 'rgba(0,0,0,0)'
+      }),
+      stroke: new Stroke({
+        color: '#888',
+        width: 1
+      })
+    }))
+
+
     // capitals layer
 
     const layerCapitals = new VectorLayer({
@@ -91,6 +91,7 @@ const MapCont = ({ capitalForecast, capitals, forecastCap, getValues }) => {
       }),
       visible: true,
       title: 'layerCap',
+      minZoom: 4
     })
 
 
@@ -99,6 +100,7 @@ const MapCont = ({ capitalForecast, capitals, forecastCap, getValues }) => {
     const layerGroup = new LayerGroup({
       layers: [
         layerOSM,
+        layerHipso,
         layerWojew,
         layerCapitals
       ]

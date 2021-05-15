@@ -51,7 +51,7 @@ const CityForecast = ({ isForecastOpen, cityForecast, latestCity, hide }) => {
 
 
   if (typeof forecast === 'undefined' || forecast.length === 0) {
-    return <div>loading ...</div>
+    return <div className={`city-forecast ${isOpen ? null : 'hidden'}`}>loading ...</div>
   }
 
   const { coord, weather, main, wind, clouds, dt, sys, visibility } = forecast.forecast

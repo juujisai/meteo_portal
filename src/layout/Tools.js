@@ -11,13 +11,14 @@ const Tools = ({ showForecast }) => {
 
   const handleSearch = () => {
     showForecast(cityValue)
+
   }
 
   return (
     <div className='tools'>
       <div className="tools-tools">
         <input type="text" placeholder='wpisz miejscowość ...' value={cityValue} onChange={(e) => setCityValue(e.target.value)} />
-        <button onClick={handleSearch}><BiSearchAlt /></button>
+        <button onClick={handleSearch} disabled={cityValue === '' ? true : false}><BiSearchAlt /></button>
         <button><GoLocation /></button>
       </div>
 
