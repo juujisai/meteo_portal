@@ -1,4 +1,7 @@
 export const initialStore = {
   capitalForecast: [],
-  capitals: []
+  capitals: [],
+  isForecastOpen: false,
+  cityForecast: [],
+  latestCity: ''
 }

@@ -1,4 +1,4 @@
-import { GET_FORECAST_FOR_CAPITALS, GET_VALUES_FROM_VECTOR } from './actions'
+import { GET_FORECAST_FOR_CAPITALS, GET_VALUES_FROM_VECTOR, SHOW_CITY_FORECAST } from './actions'
 import responseZ from '../testData/testForeCastData'
 
 import { Style } from 'ol/style'
@@ -33,12 +33,12 @@ function reducer(state, action) {
       let tempDate = JSON.parse(localStorage.getItem('capitalsForecastTime'))
 
       let today = new Date().toLocaleDateString()
-      // let today = '15.05.2021'
+      // let today = '14.05.2021'
 
       if (tempDate !== today) {
         console.log('dane przestarzałe')
       } else {
-        console.log('pobieram dane z localstorage')
+        console.log('pobieram stare dane z localstorage')
         forecast = temp
       }
     }
@@ -66,7 +66,7 @@ function reducer(state, action) {
 
 
         if (forecast.length === 0) {
-          console.log('pobieram dane')
+          console.log('pobieram nowe dane')
 
           featuresValue.forEach(item => {
             // fetch(`api.openweathermap.org/data/2.5/weather?q={${item}}&appid={${API_KEY}}`)
@@ -114,6 +114,47 @@ function reducer(state, action) {
     })
 
   }
+
+  if (action.type === SHOW_CITY_FORECAST) {
+    let cityForecast = state.cityForecast
+    let city = action.payload.city
+
+    if (JSON.parse(localStorage.getItem('cityForecast')) !== null && JSON.parse(localStorage.getItem('cityForecast')).length !== 0) {
+      let temp = JSON.parse(localStorage.getItem('cityForecast'))
+      let tempDate = JSON.parse(localStorage.getItem('cityForecastTime'))
+
+      let today = new Date().toLocaleDateString()
+      // let today = '14.05.2021'
+
+      if (tempDate !== today) {
+        console.log('dane z zapytania przestarzałe')
+      } else {
+        console.log('pobieram stare dane z zapytania z localstorage')
+        cityForecast = temp
+      }
+    }
+
+    if (cityForecast.filter(item => item.city === city).length === 0) {
+      console.log('pobieram nowe dane z zapytania')
+
+      // fetch(`api.openweathermap.org/data/2.5/weather?q={${item}}&appid={${API_KEY}}`)
+      //   .then(response => response.json())
+      //   .then(data => console.log(data))
+      let response = responseZ
+
+      cityForecast = [...cityForecast, { city, forecast: response }]
+      localStorage.setItem('cityForecast', JSON.stringify(cityForecast))
+      localStorage.setItem('cityForecastTime', JSON.stringify(new Date().toLocaleDateString()))
+
+    }
+
+    console.log(cityForecast)
+    localStorage.setItem('latestCity', JSON.stringify(city))
+
+    return { ...state, isForecastOpen: true, cityForecast, latestCity: city }
+  }
+
+
 
   return state
 }

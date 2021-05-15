@@ -3,7 +3,7 @@ import React from 'react';
 // import Layers from './layout/Layers'
 import MapCont from './layout/Map'
 import Tools from './layout/Tools'
-
+import CityForecast from './components/CityForecast'
 
 
 import { createStore } from 'redux'
@@ -22,7 +22,7 @@ function App() {
         {/* <Layers /> */}
         <MapCont />
         <Tools />
-
+        <CityForecast />
 
       </div>
     </Provider>
