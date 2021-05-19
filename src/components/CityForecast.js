@@ -46,9 +46,10 @@ const CityForecast = ({ isForecastOpen, cityForecast, latestCity, hide }) => {
 
   React.useEffect(() => {
     setIsOpen(isForecastOpen)
+    console.log(cityForecast, forecast)
+
     setForecast(cityForecast.find(item => item.city === latestCity))
   }, [isForecastOpen, isOpen, cityForecast, latestCity, forecast])
-
 
   if (typeof forecast === 'undefined' || forecast.length === 0) {
     return <div className={`city-forecast ${isOpen ? null : 'hidden'}`}>loading ...</div>
@@ -83,9 +84,9 @@ const CityForecast = ({ isForecastOpen, cityForecast, latestCity, hide }) => {
           <div className="visibility">Widzialność: <span>{visibility} m</span></div>
           <div className="wind">Wiatr: <span>{wind.speed} m/s <span className="direction" ><ImArrowUp style={{ transform: `rotate(${wind.deg}deg)`, transformOrigin: 'center' }} /></span></span></div>
           <div className="clouds">Zachmurzenie: <span>{clouds.all}%</span></div>
-          <div className="sunrise">Wschód słońca: <span>{new Date(sys.sunrise).toLocaleTimeString()} <FiSunrise /></span></div>
-          <div className="sunset">Zachód słońca: <span>{new Date(sys.sunset).toLocaleTimeString()} <FiSunset /></span></div>
-          <div className="time-of-measure">(Stan na: {new Date(dt).toLocaleDateString()} - {new Date(dt).toLocaleTimeString()})</div>
+          <div className="sunrise">Wschód słońca: <span>{new Date(sys.sunrise * 1000).toLocaleTimeString()} <FiSunrise /></span></div>
+          <div className="sunset">Zachód słońca: <span>{new Date(sys.sunset * 1000).toLocaleTimeString()} <FiSunset /></span></div>
+          <div className="time-of-measure">(Stan na: {new Date(dt * 1000).toLocaleDateString()} - {new Date(dt * 1000).toLocaleTimeString()})</div>
         </div>
       </div>
     </div >

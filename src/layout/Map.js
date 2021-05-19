@@ -11,6 +11,8 @@ import Static from 'ol/source/ImageStatic';
 import VectorSource from 'ol/source/Vector'
 import GeoJSON from 'ol/format/GeoJSON'
 import { Fill, Stroke, Style } from 'ol/style';
+// import TileWMS from 'ol/source/TileWMS';
+
 
 import LayerGroup from 'ol/layer/Group'
 
@@ -42,6 +44,18 @@ const MapCont = ({ capitalForecast, capitals, forecastCap, getValues }) => {
       visible: true,
       title: 'OSM'
     })
+
+    // const wmsHipso = new TileLayer({
+    //   source: new TileWMS({
+    //     url: 'https://mapy.geoportal.gov.pl/wss/service/PZGIK/NMT/GRID1/WMS/Hypsometry',
+    //     params: { LAYERS: 'ISOK_HipsoDyn' },
+    //     attributions: 'Geoportal'
+    //   }),
+    //   visible: true,
+    //   title: 'orto'
+    // })
+
+
     const layerHipso = new ImageLayer({
       source: new Static({
         url: hipso,
@@ -100,6 +114,7 @@ const MapCont = ({ capitalForecast, capitals, forecastCap, getValues }) => {
     const layerGroup = new LayerGroup({
       layers: [
         layerOSM,
+        // wmsHipso,
         layerHipso,
         layerWojew,
         layerCapitals
