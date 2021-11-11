@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { getForecastForCapitals } from '../redux/actions/capitalsAction'
 
+import Loader from '../components/Loader'
+
 import { Map, View } from 'ol'
 import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector'
@@ -217,7 +219,7 @@ const MapCont = ({ capitals, getCapitalForecast }) => {
 
   return capitals.loading ?
     (
-      <h2>loading ...</h2>
+      <Loader />
     )
     :
     (
