@@ -59,19 +59,17 @@ const capitalsInitialStore = {
 
 export const capitalsReducer = (state = capitalsInitialStore, action) => {
   if (action.type === FETCH_CAPITALS_FORECAST_REQUEST) {
-    // console.log('request')
+    console.log('request')
     return { ...state, loading: true }
   }
   if (action.type === FETCH_CAPITALS_FORECAST_SUCCESS) {
     console.log('success')
     const { capitalsForecast, layer, cell } = action.payload
-    // console.log(cell)
-    // console.log(action.payload)
-    // console.log(typeof action.payload === undefined)
-    setStyle(capitalsForecast, layer, cell)
+    // console.log(capitalsForecast)
 
+    // setStyle(capitalsForecast, layer, cell)
 
-    // console.log(action.payload)
+    // console.log(capitalsForecast)
 
     return {
       ...state,

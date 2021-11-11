@@ -12,6 +12,8 @@ import VectorSource from 'ol/source/Vector'
 import GeoJSON from 'ol/format/GeoJSON'
 import { Fill, Stroke, Style } from 'ol/style';
 // import TileWMS from 'ol/source/TileWMS';
+import Icon from 'ol/style/Icon'
+import Text from 'ol/style/Text'
 
 
 
@@ -24,10 +26,11 @@ import URLwoj from '../geojson/wojewodztwa_wgs84.geojson'
 import URLcap from '../geojson/stolice_wgs84.geojson'
 import hipso from '../images/hipsometria.png'
 
-const MapCont = ({ capitals, getCapitalForecast, capitalForecast }) => {
+const MapCont = ({ capitals, getCapitalForecast }) => {
   const [isFetched, setIsFetched] = React.useState(false)
   // forecastCap
   React.useEffect(() => {
+    // document.querySelector('#map').innerHTML = ''
 
     const map = new Map({
       target: 'map',
@@ -146,8 +149,8 @@ const MapCont = ({ capitals, getCapitalForecast, capitalForecast }) => {
     })
 
 
-    // get capitals data
-    layerCapitals.getSource().addEventListener('change', function (e) {
+    // function that gets value from vector layer and sends request for forecast
+    const xyz = (e) => {
       const source = e.target
       let featuresValue = []
 
@@ -156,20 +159,61 @@ const MapCont = ({ capitals, getCapitalForecast, capitalForecast }) => {
         features.forEach(item => featuresValue = [...featuresValue, item.get('naz_glowna')])
       }
 
-      if (!isFetched) {
+      const f = () => getCapitalForecast({ layer: layerCapitals, cell: 'naz_glowna', featuresValue })
+      console.log('sprawdz pogode')
+      setIsFetched(true)
+      f()
 
-        const f = () => getCapitalForecast({ layer: layerCapitals, cell: 'naz_glowna', featuresValue })
-        // if (capitals.capitalForecast.length === 0)
-        console.log('sprawdz pogode')
-        setIsFetched(true)
-        f()
-      }
-    })
+    }
 
-
+    // decide whether the listener should still run. If data got fetched, remove change listener for vector layer
+    isFetched ? layerCapitals.getSource().removeEventListener('change', xyz) : layerCapitals.getSource().addEventListener('change', xyz)
 
 
-  }, [getCapitalForecast, isFetched, capitalForecast])
+
+
+
+    // function style that changes icons for weather and shows temperature of a point
+    const setStyle = (forecast, layer, cell) => {
+      // console.log(forecast)
+      layer.setStyle(function (feature) {
+        let value = forecast
+        for (let i = 0; i < value.length; i++) {
+          // console.log('wykonuje')
+          if (feature.get(cell) === value[i].name) {
+            // console.log('found', value[i])
+            feature.setStyle(new Style({
+              image: new Icon({
+                src: `http://openweathermap.org/img/wn/${value[i].forecast.weather[0].icon}@2x.png`,
+                scale: 1,
+              }),
+              text: new Text({
+                text: `
+                ${value[i].name} 
+                ${value[i].forecast.main.temp} °C
+                `,
+                offsetY: 50,
+                offsetX: -30,
+                scale: 1.5
+              })
+            })
+            )
+          }
+
+        }
+      })
+    }
+
+
+    // change the icons only when the data is fetched
+    if (capitals.capitalForecast.length !== 0) {
+      setStyle(capitals.capitalForecast, layerCapitals, 'naz_glowna')
+    }
+
+    // console.log(layerCapitals)
+    // console.log('isFetched:', isFetched, capitals.capitalForecast)
+    // console.log(capitals.loading)
+  }, [getCapitalForecast, isFetched, capitals])
 
   return capitals.loading ?
     (
@@ -181,8 +225,8 @@ const MapCont = ({ capitals, getCapitalForecast, capitalForecast }) => {
     );
 }
 
-const mapStateToProps = ({ capitals, capitalForecast }) => {
-  return { capitals, capitalForecast }
+const mapStateToProps = ({ capitals }) => {
+  return { capitals }
 }
 
 const mapDispatchToProps = (dispatch) => {

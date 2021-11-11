@@ -17,9 +17,10 @@ export const FETCH_CAPITALS_FORECAST_FAILURE = 'FETCH_CAPITALS_FORECAST_FAILURE'
 
 
 
-export const fetchCapitalsForecastRequest = () => {
+export const fetchCapitalsForecastRequest = (loading) => {
   return {
-    type: FETCH_CAPITALS_FORECAST_REQUEST
+    type: FETCH_CAPITALS_FORECAST_REQUEST,
+    payload: loading,
   }
 }
 export const fetchCapitalsForecastSuccess = (capitalsForecast, layer, cell) => {
@@ -39,14 +40,14 @@ export const getForecastForCapitals = (data) => {
   return (dispatch) => {
     let capitalsForecast = []
     let errorMsg = ''
-    dispatch(fetchCapitalsForecastRequest)
+    dispatch(fetchCapitalsForecastRequest(true))
 
     data.featuresValue.forEach(item => {
-      // console.log('pobieram')
+      console.log('pobieram')
       // axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${item}&appid=${API_KEY}&units=metric&lang=pl`)
       axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
         .then(response => {
-          // console.log('response')
+          console.log('response')
           // const forecast = response.data
           const forecast = { weather: [{ icon: '04d' }], main: { temp: 9.9 } }
           capitalsForecast = [...capitalsForecast, { name: item, forecast }]
