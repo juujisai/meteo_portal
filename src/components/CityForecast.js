@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 // import test from '../testData/testForeCastData'
 import { ImArrowUp } from 'react-icons/im'
 import { IoCloseSharp } from 'react-icons/io5'
-import { hideForecast } from '../redux/actions'
+import { hideForecast } from '../redux/actions/action'
 import { FiSunrise, FiSunset } from 'react-icons/fi'
 
 

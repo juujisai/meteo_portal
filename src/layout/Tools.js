@@ -1,7 +1,7 @@
 import React from 'react';
 import { BiSearchAlt } from 'react-icons/bi'
 import { GoLocation } from 'react-icons/go'
-import { showCityForecast } from '../redux/actions'
+import { showCityForecast } from '../redux/actions/action'
 import { connect } from 'react-redux'
 
 

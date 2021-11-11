@@ -6,12 +6,26 @@ import Tools from './layout/Tools'
 import CityForecast from './components/CityForecast'
 
 
-import { createStore } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux'
-import reducer from './redux/reducer'
+
+import reducer from './redux/reducers/reducer'
 import { initialStore } from './redux/initialStore'
 
-const store = createStore(reducer, initialStore)
+
+import { capitalsReducer } from './redux/reducers/capitalsReducer'
+
+
+const rootReducer = combineReducers({
+  capitals: capitalsReducer
+})
+
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+)
 
 
 
@@ -22,7 +36,7 @@ function App() {
         {/* <Layers /> */}
         <MapCont />
         <Tools />
-        <CityForecast />
+        {/* <CityForecast /> */}
 
       </div>
     </Provider>

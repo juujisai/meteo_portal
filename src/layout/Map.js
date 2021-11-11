@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { getForecastForCapitals, getValuesFromVector } from '../redux/actions'
+import { getForecastForCapitals } from '../redux/actions/capitalsAction'
 
 import { Map, View } from 'ol'
 import TileLayer from 'ol/layer/Tile';
@@ -14,6 +14,7 @@ import { Fill, Stroke, Style } from 'ol/style';
 // import TileWMS from 'ol/source/TileWMS';
 
 
+
 import LayerGroup from 'ol/layer/Group'
 
 import { defaults } from 'ol/interaction';
@@ -23,8 +24,9 @@ import URLwoj from '../geojson/wojewodztwa_wgs84.geojson'
 import URLcap from '../geojson/stolice_wgs84.geojson'
 import hipso from '../images/hipsometria.png'
 
-const MapCont = ({ capitalForecast, capitals, forecastCap, getValues }) => {
-
+const MapCont = ({ capitals, getCapitalForecast, capitalForecast }) => {
+  const [isFetched, setIsFetched] = React.useState(false)
+  // forecastCap
   React.useEffect(() => {
 
     const map = new Map({
@@ -131,8 +133,7 @@ const MapCont = ({ capitalForecast, capitals, forecastCap, getValues }) => {
       })
 
 
-
-    getValues({ layer: layerCapitals, cell: 'naz_glowna' })
+    // 
 
 
     map.on('click', function (e) {
@@ -145,21 +146,49 @@ const MapCont = ({ capitalForecast, capitals, forecastCap, getValues }) => {
     })
 
 
-  })
+    // get capitals data
+    layerCapitals.getSource().addEventListener('change', function (e) {
+      const source = e.target
+      let featuresValue = []
 
-  return (
-    <div id='map'></div>
-  );
+      if (source.getState() === 'ready' && featuresValue.length === 0) {
+        let features = e.target.getFeatures()
+        features.forEach(item => featuresValue = [...featuresValue, item.get('naz_glowna')])
+      }
+
+      if (!isFetched) {
+
+        const f = () => getCapitalForecast({ layer: layerCapitals, cell: 'naz_glowna', featuresValue })
+        // if (capitals.capitalForecast.length === 0)
+        console.log('sprawdz pogode')
+        setIsFetched(true)
+        f()
+      }
+    })
+
+
+
+
+  }, [getCapitalForecast, isFetched, capitalForecast])
+
+  return capitals.loading ?
+    (
+      <h2>loading ...</h2>
+    )
+    :
+    (
+      <div id='map'></div>
+    );
 }
 
-const mapStateToProps = ({ capitalForecast, capitals }) => {
-  return { capitalForecast, capitals }
+const mapStateToProps = ({ capitals, capitalForecast }) => {
+  return { capitals, capitalForecast }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    forecastCap: (capitals) => dispatch(getForecastForCapitals(capitals)),
-    getValues: (data) => dispatch(getValuesFromVector(data))
+    // forecastCap: (capitals) => dispatch(getForecastForCapitals(capitals)),
+    getCapitalForecast: (data) => dispatch(getForecastForCapitals(data))
   }
 }
 

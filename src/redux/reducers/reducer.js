@@ -1,10 +1,10 @@
-import { GET_VALUES_FROM_VECTOR, SHOW_CITY_FORECAST, HIDE_FORECAST } from './actions'
-import responseZ from '../testData/testForeCastData'
+import { GET_VALUES_FROM_VECTOR, SHOW_CITY_FORECAST, HIDE_FORECAST } from '../actions/action'
+// import responseZ from '../testData/testForeCastData'
 
 import { Style } from 'ol/style'
 import Icon from 'ol/style/Icon'
 import Text from 'ol/style/Text'
-import API_KEY from '../key'
+import API_KEY from '../../key'
 
 function reducer(state, action) {
 
