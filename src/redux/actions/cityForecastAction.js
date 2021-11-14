@@ -156,9 +156,101 @@ export const getD5CityForecast = (data) => {
     axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
       .then(response => {
         // console.log(response)
+
+
+        const fak = {
+          data: {
+            list: [
+              {
+                dt: 1636912800,
+                main: {
+                  temp_max: 277.48,
+                  temp_min: 276.21,
+                  humidity: 89,
+                },
+                weather: {
+                  main: 'Clouds',
+                  icon: '04n'
+                },
+                dt_txt: "2021-11-14 18:00:00"
+              }
+              ,
+              {
+                dt: 1636912800,
+                main: {
+                  temp_max: 275.48,
+                  temp_min: 2736.21,
+                  humidity: 83,
+                },
+                weather: {
+                  main: 'Clouds',
+                  icon: '04n'
+                },
+                dt_txt: "2021-11-14 18:00:00"
+              },
+              {
+                dt: 1636912800,
+                main: {
+                  temp_max: 271.48,
+                  temp_min: 270.21,
+                  humidity: 81,
+                },
+                weather: {
+                  main: 'Clouds',
+                  icon: '04n'
+                },
+                dt_txt: "2021-11-14 18:00:00"
+              },
+              {
+                dt: 1636912800,
+                main: {
+                  temp_max: 272.48,
+                  temp_min: 271.21,
+                  humidity: 82,
+                },
+                weather: {
+                  main: 'Clouds',
+                  icon: '04n'
+                },
+                dt_txt: "2021-11-14 18:00:00"
+              }
+            ]
+          }
+        }
+
+        let responseData = fak.data.list
+
+        let forecast = {
+          day: [],
+          hour: [],
+          tempMax: [],
+          tempMin: [],
+          humidity: []
+        }
+
+        responseData.forEach(item => {
+          let obj = {
+            day: new Date(item.dt * 1000).toLocaleDateString(),
+            hour: new Date(item.dt * 1000).toLocaleTimeString(),
+            tempMax: item.main.temp_max,
+            tempMin: item.main.temp_min,
+            humidity: item.main.humidity,
+          }
+
+          forecast = {
+            ...forecast,
+            day: [...forecast.day, obj.day],
+            hour: [...forecast.hour, obj.hour],
+            tempMax: [...forecast.tempMax, obj.tempMax],
+            tempMin: [...forecast.tempMin, obj.tempMin],
+            humidity: [...forecast.humidity, obj.humidity]
+          }
+        })
+
+
         console.log('response 5d')
         // const response = ['kekw']
-        const forecast = ['kekw']
+        // const forecast = ['kekw']
         dispatch(fetchD5CityForecastSuccess(forecast))
       })
       .catch(error => {

@@ -87,12 +87,13 @@ export const cityForecastReducer = (state = cityForecastInitialState, action) =>
     return { ...state, d5Loading: true, d5Open: true }
   }
   if (action.type === FETCH_D5_CITY_FORECAST_SUCCESS) {
+    console.log(action.payload)
     console.log('5 days forecast success')
     return { ...state, d5Loading: false, d5: action.payload }
   }
 
   if (action.type === FETCH_D5_CITY_FORECAST_FAILURE) {
-    console.log('5 days forecast failure')
+    console.log('5 days forecast failure', action.payload)
     return { ...state, d5Loading: false, d5Open: false, d5Error: action.payload }
   }
 
