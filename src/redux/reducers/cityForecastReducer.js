@@ -7,7 +7,13 @@ const cityForecastInitialState = {
   // isOpen: false,
   errorMsg: '',
 
-  d5: [],
+  d5: {
+    day: [],
+    hour: [],
+    tempMax: [],
+    tempMin: [],
+    humidity: []
+  },
   d5Open: false,
   d5Error: '',
   d5Loading: false,
@@ -87,7 +93,7 @@ export const cityForecastReducer = (state = cityForecastInitialState, action) =>
     return { ...state, d5Loading: true, d5Open: true }
   }
   if (action.type === FETCH_D5_CITY_FORECAST_SUCCESS) {
-    console.log(action.payload)
+    // console.log(action.payload)
     console.log('5 days forecast success')
     return { ...state, d5Loading: false, d5: action.payload }
   }

@@ -179,7 +179,7 @@ export const getD5CityForecast = (data) => {
                 dt: 1636912800,
                 main: {
                   temp_max: 275.48,
-                  temp_min: 2736.21,
+                  temp_min: 273.21,
                   humidity: 83,
                 },
                 weather: {
