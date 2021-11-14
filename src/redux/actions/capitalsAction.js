@@ -43,13 +43,13 @@ export const getForecastForCapitals = (data) => {
     dispatch(fetchCapitalsForecastRequest(true))
 
     data.featuresValue.forEach(item => {
-      console.log('pobieram')
-      axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${item}&appid=${API_KEY}&units=metric&lang=pl`)
-        // axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
+      // console.log('pobieram')
+      // axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${item}&appid=${API_KEY}&units=metric&lang=pl`)
+      axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
         .then(response => {
-          console.log('response')
-          const forecast = response.data
-          // const forecast = { weather: [{ icon: '04d' }], main: { temp: 9.9 } }
+          // console.log('response')
+          // const forecast = response.data
+          const forecast = { weather: [{ icon: '04d' }], main: { temp: 9.9 } }
           capitalsForecast = [...capitalsForecast, { name: item, forecast }]
 
           data.featuresValue.length === capitalsForecast.length && dispatch(fetchCapitalsForecastSuccess(capitalsForecast, data.layer, data.cell))

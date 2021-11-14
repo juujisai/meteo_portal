@@ -13,11 +13,11 @@ import rainVideo from '../video/meteo_rain.webm'
 import thunderVideo from '../video/meteo_thunder.webm'
 
 
-const CityForecast = ({ isForecastOpen, cityForecast, latestCity, hide }) => {
-  const [isOpen, setIsOpen] = React.useState(isForecastOpen)
-  // const [isOpen, setIsOpen] = React.useState(true)
+const CityForecast = ({ city }) => {
+  // const [isOpen, setIsOpen] = React.useState(isForecastOpen)
+  const [isOpen, setIsOpen] = React.useState(false)
 
-  const [forecast, setForecast] = React.useState([])
+  // const [forecast, setForecast] = React.useState([])
   // const [forecast, setForecast] = React.useState({ city: 'kekw', forecast: test })
 
 
@@ -45,28 +45,25 @@ const CityForecast = ({ isForecastOpen, cityForecast, latestCity, hide }) => {
   }
 
   React.useEffect(() => {
-    setIsOpen(isForecastOpen)
-    console.log(cityForecast, forecast)
 
-    setForecast(cityForecast.find(item => item.city === latestCity))
-  }, [isForecastOpen, isOpen, cityForecast, latestCity, forecast])
+  }, [])
 
-  if (typeof forecast === 'undefined' || forecast.length === 0) {
+  if (!city.isOpen) {
     return <div className={`city-forecast ${isOpen ? null : 'hidden'}`}>loading ...</div>
   }
 
-  const { coord, weather, main, wind, clouds, dt, sys, visibility } = forecast.forecast
+  const { coord, weather, main, wind, clouds, dt, sys, visibility } = city.forecast
   // base, snow, rain,name,
 
 
   return (
-    <div className={`city-forecast ${isOpen ? null : 'hidden'}`}>
-      <div className="close-icon"><IoCloseSharp className='close-icon-icon' onClick={() => hide()} /></div>
+    <div className={`city-forecast ${city.isOpen ? null : 'hidden'}`}>
+      {/* <div className="close-icon"><IoCloseSharp className='close-icon-icon' onClick={() => hide()} /></div> */}
       <div className="video">
         <video src={getVideoSource(weather[0])} autoPlay={true} muted={true} loop={true}></video>
       </div>
       <div className="rest-of-forecast">
-        <h1 className="city-name">{forecast.city}</h1>
+        <h1 className="city-name">{city.city}</h1>
         <p className="coords">({coord.lon}, {coord.lat})</p>
 
         <div className="forecast-value">
@@ -93,11 +90,11 @@ const CityForecast = ({ isForecastOpen, cityForecast, latestCity, hide }) => {
   );
 }
 
-const mapStateToProps = ({ isForecastOpen, cityForecast, latestCity }) => {
-  return { isForecastOpen, cityForecast, latestCity }
+const mapStateToProps = ({ city }) => {
+  return { city }
 }
 const mapDispatchToProps = (dispatch) => {
-  return { hide: () => dispatch(hideForecast()) }
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CityForecast);

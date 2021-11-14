@@ -1,16 +1,17 @@
 import React from 'react';
 import { BiSearchAlt } from 'react-icons/bi'
 import { GoLocation } from 'react-icons/go'
-import { showCityForecast } from '../redux/actions/action'
+
 import { connect } from 'react-redux'
 
+import { getForecastForCity } from '../redux/actions/cityForecastAction'
 
 
-const Tools = ({ showForecast }) => {
+const Tools = ({ city, getForecastForCity }) => {
   const [cityValue, setCityValue] = React.useState('')
 
   const handleSearch = () => {
-    showForecast(cityValue)
+    getForecastForCity(cityValue)
 
   }
 
@@ -26,11 +27,11 @@ const Tools = ({ showForecast }) => {
   );
 }
 
-const mapStateToProps = ({ isForecastOpen }) => {
-  return { isForecastOpen }
+const mapStateToProps = ({ city }) => {
+  return { city }
 }
 const mapDispatchToProps = (dispatch) => {
-  return { showForecast: (city) => dispatch(showCityForecast(city)) }
+  return { getForecastForCity: (city) => dispatch(getForecastForCity(city)) }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Tools);
 

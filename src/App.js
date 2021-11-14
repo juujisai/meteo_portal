@@ -3,7 +3,7 @@ import React from 'react';
 // import Layers from './layout/Layers'
 import MapCont from './layout/Map'
 import Tools from './layout/Tools'
-// import CityForecast from './components/CityForecast'
+import CityForecast from './components/CityForecast'
 
 
 import { createStore, combineReducers, applyMiddleware } from 'redux'
@@ -16,10 +16,11 @@ import { Provider } from 'react-redux'
 
 
 import { capitalsReducer } from './redux/reducers/capitalsReducer'
-
+import { cityForecastReducer } from './redux/reducers/cityForecastReducer'
 
 const rootReducer = combineReducers({
-  capitals: capitalsReducer
+  capitals: capitalsReducer,
+  city: cityForecastReducer
 })
 
 const store = createStore(
@@ -36,7 +37,7 @@ function App() {
         {/* <Layers /> */}
         <MapCont />
         <Tools />
-        {/* <CityForecast /> */}
+        <CityForecast />
 
       </div>
     </Provider>
