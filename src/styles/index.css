@@ -339,16 +339,21 @@
   top: 0;
   width: 100%;
   height: 100vh;
-  background-color: #fff;
+  background-color: #ddd;
 }
 
 
 #myChart {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 400px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /* width: 100%; */
+  /* width: calc(100px * 4); */
+  /* width: calc(100px * 20); */
 
+  /* height: 400px; */
+  background-color: #fff;
   z-index: 300;
+  overflow-y: scroll;
 }

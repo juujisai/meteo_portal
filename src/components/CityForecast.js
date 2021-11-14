@@ -86,7 +86,7 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast }) => {
           <div className="time-of-measure">(Stan na: {new Date(dt * 1000).toLocaleDateString()} - {new Date(dt * 1000).toLocaleTimeString()})</div>
         </div>
       </div>
-      <button className='d5-day-forecast-button' onClick={() => getD5CityForecast(city.city)}>Pokaż pogodę 5dniową</button>
+      {!city.d5Open && <button className='d5-day-forecast-button' onClick={() => getD5CityForecast(city.city)}>Pokaż pogodę 5dniową</button>}
       {city.d5Open && <D5Forecast />}
     </div >
   );

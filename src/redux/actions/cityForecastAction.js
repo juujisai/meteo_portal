@@ -15,6 +15,7 @@ export const FETCH_D5_CITY_FORECAST_REQUEST = 'FETCH_D5_CITY_FORECAST_REQUEST'
 export const FETCH_D5_CITY_FORECAST_SUCCESS = 'FETCH_D5_CITY_FORECAST_SUCCESS'
 export const FETCH_D5_CITY_FORECAST_FAILURE = 'FETCH_D5_CITY_FORECAST_FAILURE'
 
+export const CLOSE_D5_FORECAST = 'CLOSE_D5_FORECAST'
 
 // single forecast
 
@@ -164,8 +165,8 @@ export const getD5CityForecast = (data) => {
               {
                 dt: 1636912800,
                 main: {
-                  temp_max: 277.48,
-                  temp_min: 276.21,
+                  temp_max: 17.48,
+                  temp_min: 16.21,
                   humidity: 89,
                 },
                 weather: {
@@ -178,8 +179,8 @@ export const getD5CityForecast = (data) => {
               {
                 dt: 1636912800,
                 main: {
-                  temp_max: 275.48,
-                  temp_min: 273.21,
+                  temp_max: 15.48,
+                  temp_min: 13.21,
                   humidity: 83,
                 },
                 weather: {
@@ -191,8 +192,8 @@ export const getD5CityForecast = (data) => {
               {
                 dt: 1636912800,
                 main: {
-                  temp_max: 271.48,
-                  temp_min: 270.21,
+                  temp_max: 11.48,
+                  temp_min: 10.21,
                   humidity: 81,
                 },
                 weather: {
@@ -204,8 +205,8 @@ export const getD5CityForecast = (data) => {
               {
                 dt: 1636912800,
                 main: {
-                  temp_max: 272.48,
-                  temp_min: 271.21,
+                  temp_max: 12.48,
+                  temp_min: -11.21,
                   humidity: 82,
                 },
                 weather: {
@@ -219,6 +220,7 @@ export const getD5CityForecast = (data) => {
         }
 
         let responseData = fak.data.list
+        // let responseData = response.data.list
 
         let forecast = {
           day: [],
@@ -257,5 +259,12 @@ export const getD5CityForecast = (data) => {
         dispatch(fetchD5CityForecastFailure(error))
       })
 
+  }
+}
+
+
+export const closeD5Forecast = () => {
+  return {
+    type: CLOSE_D5_FORECAST
   }
 }

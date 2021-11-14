@@ -1,4 +1,4 @@
-import { FETCH_CITY_FORECAST_REQUEST, FETCH_CITY_FORECAST_SUCCESS, FETCH_CITY_FORECAST_FAILURE, CLOSE_CITY_FORECAST, FETCH_D5_CITY_FORECAST_REQUEST, FETCH_D5_CITY_FORECAST_SUCCESS, FETCH_D5_CITY_FORECAST_FAILURE, } from '../actions/cityForecastAction'
+import { FETCH_CITY_FORECAST_REQUEST, FETCH_CITY_FORECAST_SUCCESS, FETCH_CITY_FORECAST_FAILURE, CLOSE_CITY_FORECAST, FETCH_D5_CITY_FORECAST_REQUEST, FETCH_D5_CITY_FORECAST_SUCCESS, FETCH_D5_CITY_FORECAST_FAILURE, CLOSE_D5_FORECAST } from '../actions/cityForecastAction'
 
 const cityForecastInitialState = {
   // city: '',
@@ -102,7 +102,17 @@ export const cityForecastReducer = (state = cityForecastInitialState, action) =>
     console.log('5 days forecast failure', action.payload)
     return { ...state, d5Loading: false, d5Open: false, d5Error: action.payload }
   }
-
+  if (action.type === CLOSE_D5_FORECAST) {
+    return {
+      ...state, d5Open: false, d5: {
+        day: [],
+        hour: [],
+        tempMax: [],
+        tempMin: [],
+        humidity: []
+      }
+    }
+  }
 
 
 
