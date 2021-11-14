@@ -315,3 +315,29 @@
 }
 
 /* end of forecast */
+
+
+.d5-day-forecast-button {
+  position: absolute;
+  left: 50%;
+  bottom: 1.5%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  z-index: 20;
+
+  border: 2px solid white;
+
+  color: white;
+  background-color: transparent;
+  outline: none;
+}
+
+
+.D5-forecast {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+}

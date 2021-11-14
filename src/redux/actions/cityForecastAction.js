@@ -8,6 +8,21 @@ export const FETCH_CITY_FORECAST_REQUEST = 'FETCH_CITY_FORECAST_REQUEST'
 export const FETCH_CITY_FORECAST_SUCCESS = 'FETCH_CITY_FORECAST_SUCCESS'
 export const FETCH_CITY_FORECAST_FAILURE = 'FETCH_CITY_FORECAST_FAILURE'
 
+export const CLOSE_CITY_FORECAST = 'CLOSE_CITY_FORECAST'
+
+export const GET_D5_CITY_FORECAST = 'GET_D5_CITY_FORECAST'
+export const FETCH_D5_CITY_FORECAST_REQUEST = 'FETCH_D5_CITY_FORECAST_REQUEST'
+export const FETCH_D5_CITY_FORECAST_SUCCESS = 'FETCH_D5_CITY_FORECAST_SUCCESS'
+export const FETCH_D5_CITY_FORECAST_FAILURE = 'FETCH_D5_CITY_FORECAST_FAILURE'
+
+
+// single forecast
+
+export const closeCityForecast = () => {
+  return {
+    type: CLOSE_CITY_FORECAST
+  }
+}
 
 export const fetchCityForecastRequest = (loading) => {
   return {
@@ -102,4 +117,53 @@ export const getForecastForCity = (data) => {
   }
 
 
+}
+
+
+
+
+
+
+
+
+// 5 days forecast
+export const fetchD5CityForecastRequest = (loading) => {
+  return {
+    type: FETCH_D5_CITY_FORECAST_REQUEST,
+    payload: loading,
+  }
+}
+
+export const fetchD5CityForecastSuccess = (data) => {
+  return {
+    type: FETCH_D5_CITY_FORECAST_SUCCESS,
+    payload: data,
+  }
+}
+
+export const fetchD5CityForecastFailure = (error) => {
+  return {
+    type: FETCH_D5_CITY_FORECAST_FAILURE,
+    payload: error,
+  }
+}
+
+export const getD5CityForecast = (data) => {
+  return (dispatch) => {
+    dispatch(fetchD5CityForecastRequest(true))
+
+    // axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${data}&appid=${API_KEY}`)
+    axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
+      .then(response => {
+        // console.log(response)
+        console.log('response 5d')
+        // const response = ['kekw']
+        const forecast = ['kekw']
+        dispatch(fetchD5CityForecastSuccess(forecast))
+      })
+      .catch(error => {
+        dispatch(fetchD5CityForecastFailure(error))
+      })
+
+  }
 }

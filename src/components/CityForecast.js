@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
 // import test from '../testData/testForeCastData'
+import D5Forecast from '../components/D5Forecast'
 import { ImArrowUp } from 'react-icons/im'
 import { IoCloseSharp } from 'react-icons/io5'
-import { hideForecast } from '../redux/actions/action'
 import { FiSunrise, FiSunset } from 'react-icons/fi'
-
+import { closeCityForecast, getD5CityForecast } from '../redux/actions/cityForecastAction'
 
 import clearskyVideo from '../video/meteo_clearsky.webm'
 import cloudsVideo from '../video/meteo_clouds.webm'
@@ -13,7 +13,7 @@ import rainVideo from '../video/meteo_rain.webm'
 import thunderVideo from '../video/meteo_thunder.webm'
 
 
-const CityForecast = ({ city }) => {
+const CityForecast = ({ city, closeCityForecast, getD5CityForecast }) => {
   // const [isOpen, setIsOpen] = React.useState(isForecastOpen)
   const [isOpen, setIsOpen] = React.useState(false)
 
@@ -58,7 +58,7 @@ const CityForecast = ({ city }) => {
 
   return (
     <div className={`city-forecast ${city.isOpen ? null : 'hidden'}`}>
-      {/* <div className="close-icon"><IoCloseSharp className='close-icon-icon' onClick={() => hide()} /></div> */}
+      <div className="close-icon"><IoCloseSharp className='close-icon-icon' onClick={() => closeCityForecast()} /></div>
       <div className="video">
         <video src={getVideoSource(weather[0])} autoPlay={true} muted={true} loop={true}></video>
       </div>
@@ -86,6 +86,8 @@ const CityForecast = ({ city }) => {
           <div className="time-of-measure">(Stan na: {new Date(dt * 1000).toLocaleDateString()} - {new Date(dt * 1000).toLocaleTimeString()})</div>
         </div>
       </div>
+      <button className='d5-day-forecast-button' onClick={() => getD5CityForecast(city.city)}>Pokaż pogodę 5dniową</button>
+      {city.d5Open && <D5Forecast />}
     </div >
   );
 }
@@ -94,7 +96,10 @@ const mapStateToProps = ({ city }) => {
   return { city }
 }
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    closeCityForecast: () => dispatch(closeCityForecast()),
+    getD5CityForecast: (data) => dispatch(getD5CityForecast(data))
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CityForecast);
