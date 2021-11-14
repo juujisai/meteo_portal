@@ -10,7 +10,7 @@ const D5Forecast = ({ city, closeD5Forecast }) => {
   React.useEffect(() => {
     if (city.d5.day.length > 0) {
       const ctx = document.getElementById('myChart')
-      const colors = ['rgb(252, 61, 80)', 'rgb(147, 115, 235)', 'rgba(198, 255, 189,.5)', 'rgb(116, 168, 108)']
+      const colors = ['rgb(252, 61, 80)', 'rgb(147, 115, 235)', 'rgb(212, 42, 195)', 'rgba(198, 255, 189,.5)', 'rgb(116, 168, 108)']
       const getMinMaxValue = (option, values, toEven = true) => {
         let number;
         if (option === 'max') {
@@ -27,8 +27,6 @@ const D5Forecast = ({ city, closeD5Forecast }) => {
             number--
           }
         }
-        console.log(number)
-
         return number
       }
 
@@ -60,18 +58,36 @@ const D5Forecast = ({ city, closeD5Forecast }) => {
               }
             },
 
-          }, {
-            type: 'bar',
-            label: 'wilgotność',
-            data: city.d5.humidity,
-            yAxisID: 'y1',
-            backgroundColor: colors[2],
-            borderColor: colors[3],
-            borderWidth: 1,
+          },
+          {
+            type: 'line',
+            label: 'Temp. odczuwalna',
+            data: city.d5.feels_like,
+            yAxisID: 'y',
+            tension: 0.1,
+            borderColor: colors[2],
             animations: {
               y: {
                 duration: 2000,
                 delay: 400
+              }
+            },
+
+          },
+
+
+          {
+            type: 'bar',
+            label: 'wilgotność',
+            data: city.d5.humidity,
+            yAxisID: 'y1',
+            backgroundColor: colors[3],
+            borderColor: colors[4],
+            borderWidth: 1,
+            animations: {
+              y: {
+                duration: 2000,
+                delay: 600
               }
             },
           }
@@ -176,8 +192,9 @@ const D5Forecast = ({ city, closeD5Forecast }) => {
   return (
     <div className="D5-forecast" style={{ overflowY: 'scroll' }}>
       <div className="close-icon"><IoCloseSharp className='close-icon-icon' onClick={() => closeD5Forecast()} /></div>
-
-      <canvas width={city.d5.day.length * 100} height={400} id='myChart' ></canvas>
+      <div className="chart-container">
+        <canvas width={city.d5.day.length * 100} height={400} id='myChart' ></canvas>
+      </div>
     </div>
   );
 }

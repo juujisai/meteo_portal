@@ -12,6 +12,7 @@ const cityForecastInitialState = {
     hour: [],
     tempMax: [],
     tempMin: [],
+    feels_like: [],
     humidity: []
   },
   d5Open: false,
@@ -109,6 +110,7 @@ export const cityForecastReducer = (state = cityForecastInitialState, action) =>
         hour: [],
         tempMax: [],
         tempMin: [],
+        feels_like: [],
         humidity: []
       }
     }

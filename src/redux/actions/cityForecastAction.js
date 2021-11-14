@@ -153,7 +153,7 @@ export const getD5CityForecast = (data) => {
   return (dispatch) => {
     dispatch(fetchD5CityForecastRequest(true))
 
-    // axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${data}&appid=${API_KEY}`)
+    // axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${data}&appid=${API_KEY}&units=metric&lang=pl`)
     axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
       .then(response => {
         // console.log(response)
@@ -167,6 +167,7 @@ export const getD5CityForecast = (data) => {
                 main: {
                   temp_max: 17.48,
                   temp_min: 16.21,
+                  feels_like: 16.21,
                   humidity: 89,
                 },
                 weather: {
@@ -181,6 +182,7 @@ export const getD5CityForecast = (data) => {
                 main: {
                   temp_max: 15.48,
                   temp_min: 13.21,
+                  feels_like: 16.21,
                   humidity: 83,
                 },
                 weather: {
@@ -194,6 +196,7 @@ export const getD5CityForecast = (data) => {
                 main: {
                   temp_max: 11.48,
                   temp_min: 10.21,
+                  feels_like: 16.21,
                   humidity: 81,
                 },
                 weather: {
@@ -207,6 +210,7 @@ export const getD5CityForecast = (data) => {
                 main: {
                   temp_max: 12.48,
                   temp_min: -11.21,
+                  feels_like: 16.21,
                   humidity: 82,
                 },
                 weather: {
@@ -227,6 +231,7 @@ export const getD5CityForecast = (data) => {
           hour: [],
           tempMax: [],
           tempMin: [],
+          feels_like: [],
           humidity: []
         }
 
@@ -236,6 +241,7 @@ export const getD5CityForecast = (data) => {
             hour: new Date(item.dt * 1000).toLocaleTimeString(),
             tempMax: item.main.temp_max,
             tempMin: item.main.temp_min,
+            feels_like: item.main.feels_like,
             humidity: item.main.humidity,
           }
 
@@ -245,10 +251,12 @@ export const getD5CityForecast = (data) => {
             hour: [...forecast.hour, obj.hour],
             tempMax: [...forecast.tempMax, obj.tempMax],
             tempMin: [...forecast.tempMin, obj.tempMin],
+            feels_like: [...forecast.feels_like, obj.feels_like],
             humidity: [...forecast.humidity, obj.humidity]
           }
         })
 
+        // console.log(forecast.tempMax, forecast.tempMin)
 
         console.log('response 5d')
         // const response = ['kekw']

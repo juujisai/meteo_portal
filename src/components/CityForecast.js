@@ -58,7 +58,7 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast }) => {
 
   return (
     <div className={`city-forecast ${city.isOpen ? null : 'hidden'}`}>
-      <div className="close-icon"><IoCloseSharp className='close-icon-icon' onClick={() => closeCityForecast()} /></div>
+      {!city.d5Open && <div className="close-icon"><IoCloseSharp className='close-icon-icon' onClick={() => closeCityForecast()} /></div>}
       <div className="video">
         <video src={getVideoSource(weather[0])} autoPlay={true} muted={true} loop={true}></video>
       </div>
