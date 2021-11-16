@@ -192,6 +192,9 @@ const D5Forecast = ({ city, closeD5Forecast }) => {
   return (
     <div className="D5-forecast" style={{ overflowY: 'scroll' }}>
       <div className="close-icon"><IoCloseSharp className='close-icon-icon' onClick={() => closeD5Forecast()} /></div>
+      <div className="d5-forecast-name">
+        {city.city}
+      </div>
       <div className="chart-container">
         <canvas width={city.d5.day.length * 100} height={400} id='myChart' ></canvas>
       </div>
