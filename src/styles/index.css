@@ -608,10 +608,8 @@
 
 
 .d5-day-forecast-button {
-  position: absolute;
-  left: 50%;
-  bottom: 1.5%;
-  transform: translateX(-50%);
+  display: block;
+  margin: 20px auto;
   padding: 10px 20px;
   z-index: 20;
 

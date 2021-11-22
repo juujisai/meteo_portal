@@ -50,25 +50,29 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast }) => {
     let interval;
 
     if (city.isOpen) {
+      let a = city.forecast.weather[0].icon
+
+      if (a === '09d' || a === '09n' || a === '10d' || a === '10n') {
 
 
 
-      interval = setInterval(() => {
+        interval = setInterval(() => {
 
-        const x = Math.floor(Math.random() * 100)
-        const y = Math.floor(Math.random() * 100)
-        const r = Math.floor(Math.random() * 5)
-        let b = numberOfBubbles
+          const x = Math.floor(Math.random() * 100)
+          const y = Math.floor(Math.random() * 100)
+          const r = Math.floor(Math.random() * 5)
+          let b = numberOfBubbles
 
-        if (b.length < 100) {
+          if (b.length < 100) {
 
-          b = [...b, { x, y, r }]
-        } else {
-          clearInterval(interval)
-        }
+            b = [...b, { x, y, r }]
+          } else {
+            clearInterval(interval)
+          }
 
-        setNumberOfBubbles(b)
-      }, 400)
+          setNumberOfBubbles(b)
+        }, 400)
+      }
     }
     return () => clearInterval(interval)
   }, [city, numberOfBubbles])
@@ -81,17 +85,17 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast }) => {
   const { coord, weather, main, wind, clouds, dt, sys, visibility } = city.forecast
 
 
-  // let whichIcon = weather[0].icon
-  let whichIcon = '50n'
-
+  let whichIcon = weather[0].icon
+  // let whichIcon = '50d'
+  console.log(whichIcon)
   const weatherF = (a) => {
     if (a === '01d') return 'sunny-weather'
     if (a === '02d' || a === '03d' || a === '04d') return 'cloudy-weather-day'
     if (a === '02n' || a === '03n' || a === '04n') return 'cloudy-weather-night'
     if (a === '11d' || a === '11n') return 'storm-weather'
     if (a === '09d' || a === '09n' || a === '10d' || a === '10n') return 'rain-weather'
-    if (a === '13d' || a === '13n') return 'fog-weather'
-    if (a === '50d' || a === '50n') return 'snow-weather'
+    if (a === '13d' || a === '13n') return 'snow-weather'
+    if (a === '50d' || a === '50n') return 'fog-weather'
 
 
   }
@@ -168,9 +172,11 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast }) => {
           <div className="sunset">Zachód słońca: <span>{new Date(sys.sunset * 1000).toLocaleTimeString()} <FiSunset /></span></div>
           <div className="time-of-measure">(Stan na: {new Date(dt * 1000).toLocaleDateString()} - {new Date(dt * 1000).toLocaleTimeString()})</div>
         </div>
+        {!city.d5Open && <button className='d5-day-forecast-button' onClick={() => getD5CityForecast(city.city)}>Pokaż pogodę 5dniową</button>}
+        {city.d5Open && <D5Forecast />}
+
       </div>
-      {!city.d5Open && <button className='d5-day-forecast-button' onClick={() => getD5CityForecast(city.city)}>Pokaż pogodę 5dniową</button>}
-      {city.d5Open && <D5Forecast />}
+
     </div >
   );
 }
