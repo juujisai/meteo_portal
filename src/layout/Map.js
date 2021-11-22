@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { getForecastForCapitals } from '../redux/actions/capitalsAction'
-
+import { setMapObject } from '../redux/actions/mapAction'
 import Loader from '../components/Loader'
 
 import { Map, View } from 'ol'
@@ -28,7 +28,7 @@ import URLwoj from '../geojson/wojewodztwa_wgs84.geojson'
 import URLcap from '../geojson/stolice_wgs84.geojson'
 import hipso from '../images/hipsometria.png'
 
-const MapCont = ({ capitals, getCapitalForecast }) => {
+const MapCont = ({ capitals, getCapitalForecast, setMapObject }) => {
   const [isFetched, setIsFetched] = React.useState(false)
   // forecastCap
   React.useEffect(() => {
@@ -61,7 +61,6 @@ const MapCont = ({ capitals, getCapitalForecast }) => {
     //   visible: true,
     //   title: 'orto'
     // })
-
 
     const layerHipso = new ImageLayer({
       source: new Static({
@@ -210,12 +209,14 @@ const MapCont = ({ capitals, getCapitalForecast }) => {
     // change the icons only when the data is fetched
     if (capitals.capitalForecast.length !== 0) {
       setStyle(capitals.capitalForecast, layerCapitals, 'naz_glowna')
+      setMapObject(map)
+
     }
 
     // console.log(layerCapitals)
     // console.log('isFetched:', isFetched, capitals.capitalForecast)
     // console.log(capitals.loading)
-  }, [getCapitalForecast, isFetched, capitals])
+  }, [getCapitalForecast, isFetched, capitals, setMapObject])
 
   return capitals.loading ?
     (
@@ -234,7 +235,8 @@ const mapStateToProps = ({ capitals }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     // forecastCap: (capitals) => dispatch(getForecastForCapitals(capitals)),
-    getCapitalForecast: (data) => dispatch(getForecastForCapitals(data))
+    getCapitalForecast: (data) => dispatch(getForecastForCapitals(data)),
+    setMapObject: (data) => dispatch(setMapObject(data))
   }
 }
 

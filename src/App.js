@@ -17,10 +17,12 @@ import { Provider } from 'react-redux'
 
 import { capitalsReducer } from './redux/reducers/capitalsReducer'
 import { cityForecastReducer } from './redux/reducers/cityForecastReducer'
+import { mapReducer } from './redux/reducers/mapReducer'
 
 const rootReducer = combineReducers({
   capitals: capitalsReducer,
-  city: cityForecastReducer
+  city: cityForecastReducer,
+  map: mapReducer
 })
 
 const store = createStore(
