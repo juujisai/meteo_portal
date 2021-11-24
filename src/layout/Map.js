@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getForecastForCapitals } from '../redux/actions/capitalsAction'
 import { setMapObject } from '../redux/actions/mapAction'
 import Loader from '../components/Loader'
+import D5Forecast from '../components/D5Forecast'
 
 import { Map, View } from 'ol'
 import TileLayer from 'ol/layer/Tile';
@@ -234,8 +235,14 @@ const MapCont = ({ capitals, getCapitalForecast, setMapObject, city }) => {
     )
     :
     (
-      <div id='map' ></div>
-      // <div id='map' className={city.isOpen && window.innerWidth >= 1024 ? 'forecast-open' : null}></div>
+      <>
+        <div id='map' ></div>
+
+
+        {/* // <div id='map' className={city.isOpen && window.innerWidth >= 1024 ? 'forecast-open' : null}></div> */}
+
+        {city.d5Open && <D5Forecast />}
+      </>
     );
 }
 

@@ -130,8 +130,9 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
 
 
   }
-
-  if (map.map !== undefined) {
+  console.log('refresh city forecast')
+  // if (map.map !== undefined) {
+  if (map.map === 'kappa') {
     const cityCoord = fromLonLat([coord.lat, coord.lon])
     console.log(coord, cityCoord)
     // map.map.getView().setCenter(cityCoord)
@@ -299,7 +300,7 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
           <div className="time-of-measure">(Stan na: {new Date(dt * 1000).toLocaleDateString()} - {new Date(dt * 1000).toLocaleTimeString()})</div>
         </div>
         {!city.d5Open && <button className='d5-day-forecast-button' onClick={() => getD5CityForecast(city.city)}>Pokaż pogodę 5dniową</button>}
-        {city.d5Open && <D5Forecast />}
+        {/* {city.d5Open && <D5Forecast />} */}
 
       </div>
 
