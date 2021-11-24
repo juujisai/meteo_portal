@@ -821,6 +821,10 @@
 
   .App {
     background-color: #fff;
+    background-image: url(../images/Frame1.png);
+    background-repeat: no-repeat;
+    background-position: 100% 0;
+    background-size: 70% 100%;
     overflow: hidden;
   }
 
@@ -835,6 +839,16 @@
     width: 45%;
     height: 60vh;
   } */
+
+  .tools {
+    left: 50%;
+  }
+
+  .tools::before {
+    background-color: #fff;
+    color: #000;
+    padding: 10px 20px;
+  }
 
   #map {
     position: absolute;
