@@ -169,7 +169,7 @@ const MapCont = ({ capitals, getCapitalForecast, setMapObject, city }) => {
       }
 
       const f = () => getCapitalForecast({ layer: layerCapitals, cell: 'naz_glowna', featuresValue })
-      console.log('sprawdz pogode')
+      // console.log('sprawdz pogode')
       setIsFetched(true)
       f()
 

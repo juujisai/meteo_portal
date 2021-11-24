@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 // import test from '../testData/testForeCastData'
-import D5Forecast from '../components/D5Forecast'
+// import D5Forecast from '../components/D5Forecast'
 import { ImArrowUp } from 'react-icons/im'
 import { IoCloseSharp } from 'react-icons/io5'
 import { FiSunrise, FiSunset } from 'react-icons/fi'
@@ -31,7 +31,7 @@ import fog from '../images/fog.png'
 
 const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
   // const [isOpen, setIsOpen] = React.useState(isForecastOpen)
-  const [isOpen, setIsOpen] = React.useState(false)
+  // const [isOpen, setIsOpen] = React.useState(false)
   const [numberOfBubbles, setNumberOfBubbles] = React.useState([])
   // const [forecast, setForecast] = React.useState([])
   // const [forecast, setForecast] = React.useState({ city: 'kekw', forecast: test })
@@ -46,11 +46,11 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
     // setTimeout(function () {
     //   document.getElementById('map').style.filter = 'brightness(1)'
 
-    //   map.map.getView().fit(
-    //     [1572152.3511472388636321, 6275208.6524272579699755, 2687896.2767138490453362, 7330182.4313131291419268]
-    //     , {
-    //       padding: [10, 10, 10, 10]
-    //     })
+    map.map.getView().fit(
+      [1572152.3511472388636321, 6275208.6524272579699755, 2687896.2767138490453362, 7330182.4313131291419268]
+      , {
+        padding: [10, 10, 10, 10]
+      })
     //   map.map.updateSize();
     // }, 500);
 
@@ -109,7 +109,7 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
 
 
   if (!city.isOpen) {
-    return <div className={`city-forecast ${isOpen ? null : 'hidden'}`}>loading ...</div>
+    return <div className={`city-forecast hidden`}>loading ...</div>
   }
 
   const { coord, weather, main, wind, clouds, dt, sys, visibility } = city.forecast
@@ -130,98 +130,100 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
 
 
   }
-  console.log('refresh city forecast')
-  // if (map.map !== undefined) {
-  if (map.map === 'kappa') {
+
+  // console.log('refresh city forecast')
+
+  if (map.map !== undefined) {
+    const center = map.map.getView().getCenter()
+    // if (map.map === 'kappa') {
     const cityCoord = fromLonLat([coord.lat, coord.lon])
-    console.log(coord, cityCoord)
-    // map.map.getView().setCenter(cityCoord)
-    // map.map.getView().setZoom(6)
+    // console.log(coord, cityCoord, center)
 
 
+    // console.log(center[0] === cityCoord[0])
     // add layer with searched place
-
-    const markerStyle = new Style({
-      image: new Icon({
-        src: `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`,
-        scale: 1,
-      }),
-      text: new Text({
-        text: `
+    if (center[0] !== cityCoord[0]) {
+      const markerStyle = new Style({
+        image: new Icon({
+          src: `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`,
+          scale: 1,
+        }),
+        text: new Text({
+          text: `
               ${city.city} 
               ${main.temp} °C
               `,
-        offsetY: 50,
-        offsetX: -30,
-        scale: 1.5
+          offsetY: 50,
+          offsetX: -30,
+          scale: 1.5
+        })
       })
-    })
 
 
-    let positionMarker = new Feature()
-    positionMarker.setStyle(markerStyle)
+      let positionMarker = new Feature()
+      positionMarker.setStyle(markerStyle)
 
-    positionMarker.setGeometry(cityCoord.length === 2 ? new Point(cityCoord) : null)
+      positionMarker.setGeometry(cityCoord.length === 2 ? new Point(cityCoord) : null)
 
-    const markerLayer = new VectorLayer({
-      source: new VectorSource({
-        features: [positionMarker]
-      }),
-      visible: true
-    })
+      const markerLayer = new VectorLayer({
+        source: new VectorSource({
+          features: [positionMarker]
+        }),
+        visible: true
+      })
 
-    map.map.addLayer(markerLayer)
+      map.map.addLayer(markerLayer)
 
 
-    // animate to the location
+      // animate to the location
 
-    const view = new View({
-      center: [
-        2105764.996555635,
-        6848058.276910348
-      ],
-      zoom: 11
-    })
+      const view = new View({
+        center: [
+          2105764.996555635,
+          6848058.276910348
+        ],
+        zoom: 11
+      })
 
-    map.map.setView(view)
+      map.map.setView(view)
 
-    function flyTo(location, done) {
-      const duration = 2000;
-      const zoom = view.getZoom();
-      let parts = 2;
-      let called = false;
-      function callback(complete) {
-        --parts;
-        if (called) {
-          return;
+      function flyTo(location, done) {
+        const duration = 2000;
+        const zoom = view.getZoom();
+        let parts = 2;
+        let called = false;
+        function callback(complete) {
+          --parts;
+          if (called) {
+            return;
+          }
+          if (parts === 0 || !complete) {
+            called = true;
+            done(complete);
+          }
         }
-        if (parts === 0 || !complete) {
-          called = true;
-          done(complete);
-        }
+        view.animate(
+          {
+            center: location,
+            duration: duration,
+          },
+          callback
+        );
+        view.animate(
+          {
+            zoom: zoom - 1,
+            duration: duration / 2,
+          },
+          {
+            zoom: zoom,
+            duration: duration / 2,
+          },
+          callback
+        );
       }
-      view.animate(
-        {
-          center: location,
-          duration: duration,
-        },
-        callback
-      );
-      view.animate(
-        {
-          zoom: zoom - 1,
-          duration: duration / 2,
-        },
-        {
-          zoom: zoom,
-          duration: duration / 2,
-        },
-        callback
-      );
+
+      flyTo(cityCoord, function () { })
     }
-
-    flyTo(cityCoord, function () { })
-
   }
 
 

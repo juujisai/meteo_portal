@@ -157,7 +157,7 @@ export const getD5CityForecast = (data) => {
     // axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${data}&appid=${API_KEY}&units=metric&lang=pl`)
     axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
       .then(response => {
-        // console.log(response)
+        // console.log('response d5')
 
 
         const fak = {
