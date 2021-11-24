@@ -12,17 +12,17 @@ const Tools = ({ city, getForecastForCity, map }) => {
 
   const handleSearch = () => {
     getForecastForCity(cityValue)
-    document.getElementById('map').classList.add('forecast-open')
-    document.getElementById('map').style.filter = 'brightness(0)'
-    setTimeout(function () {
-      document.getElementById('map').style.filter = 'brightness(1)'
-      map.map.updateSize();
-      map.map.getView().fit(
-        [1572152.3511472388636321, 6275208.6524272579699755, 2687896.2767138490453362, 7330182.4313131291419268]
-        , {
-          padding: [10, 10, 10, 10]
-        })
-    }, 500);
+    // document.getElementById('map').classList.add('forecast-open')
+    // // document.getElementById('map').style.filter = 'brightness(0)'
+    // setTimeout(function () {
+    //   document.getElementById('map').style.filter = 'brightness(1)'
+    //   map.map.updateSize();
+    //   map.map.getView().fit(
+    //     [1572152.3511472388636321, 6275208.6524272579699755, 2687896.2767138490453362, 7330182.4313131291419268]
+    //     , {
+    //       padding: [10, 10, 10, 10]
+    //     })
+    // }, 500);
   }
 
   return (

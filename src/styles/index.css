@@ -820,41 +820,44 @@
 
   .App {
     background-color: #fff;
+    overflow: hidden;
   }
 
-  #map {
+  /* #map {
     position: relative;
     transition: .3s;
     background-color: #000;
   }
 
-  #map::after {
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    content: 'helo';
-    color: white;
-    z-index: 15;
-  }
-
-
   #map.forecast-open {
     top: 40%;
     width: 45%;
     height: 60vh;
+  } */
+
+  #map {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40%;
+    height: 100vh;
+    transform: translate(0, 0);
+    border: none;
+    border-radius: 0;
+    z-index: 10;
   }
-
-
 
   .city-forecast {
-    left: 50%;
+    left: 40%;
 
-    width: 50%;
+    width: 60%;
 
   }
 
+  .city-forecast.hidden {
+    left: 40%;
+    transform: translateX(-100%)
+  }
 
   .tools {
     position: absolute;

@@ -6,7 +6,7 @@ const initialState = {
 
 export const mapReducer = (state = initialState, action) => {
   if (action.type === SET_MAP_OBJECT) {
-    console.log(action.payload)
+    // console.log(action.payload)
     return { ...state, map: action.payload }
   }
   return { ...state }

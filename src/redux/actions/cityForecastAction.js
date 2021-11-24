@@ -64,8 +64,8 @@ export const getForecastForCity = (data) => {
           name: data,
           forecast: {
             coord: {
-              lon: -122.08,
-              lat: 37.39
+              lon: 53.562777777778,
+              lat: 20.985277777778
             },
             weather: [
               {
