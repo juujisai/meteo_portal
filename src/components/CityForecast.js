@@ -22,14 +22,32 @@ import snow from '../images/snow.png'
 import fog from '../images/fog.png'
 
 
-const CityForecast = ({ city, closeCityForecast, getD5CityForecast }) => {
+const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
   // const [isOpen, setIsOpen] = React.useState(isForecastOpen)
   const [isOpen, setIsOpen] = React.useState(false)
   const [numberOfBubbles, setNumberOfBubbles] = React.useState([])
   // const [forecast, setForecast] = React.useState([])
   // const [forecast, setForecast] = React.useState({ city: 'kekw', forecast: test })
 
+  const handleClick = () => {
+    closeCityForecast()
+    document.getElementById('map').classList.remove('forecast-open')
+    document.getElementById('map').style.filter = 'brightness(0)'
+    // document.getElementById('map').style.filter = 'url("../images/daw.png")'
 
+
+    setTimeout(function () {
+      document.getElementById('map').style.filter = 'brightness(1)'
+
+      map.map.updateSize();
+      map.map.getView().fit(
+        [1572152.3511472388636321, 6275208.6524272579699755, 2687896.2767138490453362, 7330182.4313131291419268]
+        , {
+          padding: [10, 10, 10, 10]
+        })
+    }, 500);
+
+  }
 
   let rainTypes = [bubble1, bubble2, bubble3, bubble4, bubble5]
 
@@ -45,11 +63,14 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast }) => {
     )
   }
 
+
+
   )
   React.useEffect(() => {
     let interval;
 
     if (city.isOpen) {
+
       let a = city.forecast.weather[0].icon
 
       if (a === '09d' || a === '09n' || a === '10d' || a === '10n') {
@@ -105,7 +126,7 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast }) => {
 
   return (
     <div className={`city-forecast ${city.isOpen ? null : 'hidden'}`}>
-      {!city.d5Open && <div className="close-icon"><IoCloseSharp className='close-icon-icon' onClick={() => closeCityForecast()} /></div>}
+      {!city.d5Open && <div className="close-icon"><IoCloseSharp className='close-icon-icon' onClick={() => handleClick()} /></div>}
       <div className="weather-animation">
         <div className="base-img">
           <img src={whichIcon[whichIcon.length - 1] === 'd' ? day : night} alt="zdjęcie miasta" />
@@ -181,8 +202,8 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast }) => {
   );
 }
 
-const mapStateToProps = ({ city }) => {
-  return { city }
+const mapStateToProps = ({ city, map }) => {
+  return { city, map }
 }
 const mapDispatchToProps = (dispatch) => {
   return {

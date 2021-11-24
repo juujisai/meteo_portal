@@ -28,7 +28,7 @@ import URLwoj from '../geojson/wojewodztwa_wgs84.geojson'
 import URLcap from '../geojson/stolice_wgs84.geojson'
 import hipso from '../images/hipsometria.png'
 
-const MapCont = ({ capitals, getCapitalForecast, setMapObject }) => {
+const MapCont = ({ capitals, getCapitalForecast, setMapObject, city }) => {
   const [isFetched, setIsFetched] = React.useState(false)
   // forecastCap
   React.useEffect(() => {
@@ -45,6 +45,10 @@ const MapCont = ({ capitals, getCapitalForecast, setMapObject }) => {
         pinchRotate: false
       })
     })
+
+
+
+
     // Open Street Map base map
     const layerOSM = new TileLayer({
       source: new OSM(),
@@ -152,6 +156,9 @@ const MapCont = ({ capitals, getCapitalForecast, setMapObject }) => {
 
     // function that gets value from vector layer and sends request for forecast
     const xyz = (e) => {
+      console.log('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+
+
       const source = e.target
       let featuresValue = []
 
@@ -212,7 +219,10 @@ const MapCont = ({ capitals, getCapitalForecast, setMapObject }) => {
       setMapObject(map)
 
     }
+    // if (city.isOpen) {
+    //   map.updateSize()
 
+    // }
     // console.log(layerCapitals)
     // console.log('isFetched:', isFetched, capitals.capitalForecast)
     // console.log(capitals.loading)
@@ -224,12 +234,13 @@ const MapCont = ({ capitals, getCapitalForecast, setMapObject }) => {
     )
     :
     (
-      <div id='map'></div>
+      <div id='map' ></div>
+      // <div id='map' className={city.isOpen && window.innerWidth >= 1024 ? 'forecast-open' : null}></div>
     );
 }
 
-const mapStateToProps = ({ capitals }) => {
-  return { capitals }
+const mapStateToProps = ({ capitals, city }) => {
+  return { capitals, city }
 }
 
 const mapDispatchToProps = (dispatch) => {

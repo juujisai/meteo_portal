@@ -787,3 +787,176 @@
 
 
 }
+
+
+/* styles for tablets */
+
+
+@media (orientation: portrait) and (min-width: 700px) {
+
+  .city-name,
+  .coords,
+  .forecast-value,
+  .parameters {
+    margin: 0 auto;
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+    width: 60%;
+  }
+
+  .city-name {
+    margin: 100px auto 0;
+  }
+
+}
+
+
+@media (min-width: 1024px) {
+  :root {
+    --mapWidth: 60%;
+    --mapHeight: 85vh;
+    --toolsHeight: 5vh;
+  }
+
+  .App {
+    background-color: #fff;
+  }
+
+  #map {
+    position: relative;
+    transition: .3s;
+    background-color: #000;
+  }
+
+  #map::after {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    content: 'helo';
+    color: white;
+    z-index: 15;
+  }
+
+
+  #map.forecast-open {
+    top: 40%;
+    width: 45%;
+    height: 60vh;
+  }
+
+
+
+  .city-forecast {
+    left: 50%;
+
+    width: 50%;
+
+  }
+
+
+  .tools {
+    position: absolute;
+    bottom: auto;
+    top: 50%;
+    left: 65%;
+    transform: translate(0, -50%);
+    display: flex;
+    align-items: flex-end;
+    height: calc(2 * var(--toolsHeight));
+    width: 32.5%;
+    background-color: #fff;
+    border: 4px solid black;
+    z-index: 1;
+  }
+
+
+
+
+  .tools::before {
+    display: block;
+    position: absolute;
+    content: 'Wyszukaj prognozę pogody';
+    left: 0%;
+    top: -100%;
+    color: #fff
+  }
+
+
+  .tools-tools {
+    align-items: center;
+    margin: 0 0;
+    height: 100%
+  }
+
+  .tools-tools button {
+    font-size: 1em;
+  }
+
+  .rest-of-forecast {
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+  }
+
+  .city-name,
+  .coords,
+  .forecast-value {
+    width: 45%;
+    margin-right: 15%;
+  }
+
+  .forecast-value {
+    margin: 0 2.5%;
+  }
+
+  .parameters {
+    position: absolute;
+    left: 50%;
+    width: 45%;
+    margin: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    /* height: 70%; */
+
+  }
+
+  .parameters div {
+    width: 100%;
+  }
+
+  .d5-day-forecast-button {
+    position: absolute;
+    bottom: 2.5%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin: 0;
+  }
+
+  .D5-forecast .close-icon {
+    top: 2.5%
+  }
+
+  .D5-forecast .close-icon-icon {
+    color: #000
+  }
+
+  .d5-forecast-name {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: translate(0, 0)
+  }
+
+  .chart-container {
+    position: relative;
+    max-width: 85%;
+  }
+
+
+
+
+
+}
