@@ -136,7 +136,7 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
   if (map.map !== undefined) {
     const center = map.map.getView().getCenter()
     // if (map.map === 'kappa') {
-    const cityCoord = fromLonLat([coord.lat, coord.lon])
+    const cityCoord = fromLonLat([coord.lon, coord.lat])
     // console.log(coord, cityCoord, center)
 
 
