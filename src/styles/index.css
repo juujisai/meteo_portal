@@ -671,7 +671,7 @@
 
 
 
-@media (orientation: landscape) {
+@media (orientation: landscape) and (min-width: 500px) {
 
   :root {
     --mapWidth: 60%;
