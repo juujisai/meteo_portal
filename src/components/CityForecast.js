@@ -22,7 +22,6 @@ import bubble2 from '../images/rain_bubble_2.webp'
 import bubble3 from '../images/rain_bubble_3.webp'
 import bubble4 from '../images/rain_bubble_4.webp'
 import bubble5 from '../images/rain_bubble_5.webp'
-// import rain from '../images/rain_lines.png'
 import snow from '../images/snow.webp'
 import fog from '../images/fog.webp'
 
@@ -105,7 +104,6 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
 
   let whichIcon = weather[0].icon
   // let whichIcon = '50d'
-  // console.log(whichIcon)
   const weatherF = (a) => {
     if (a === '01d') return 'sunny-weather'
     if (a === '02d' || a === '03d' || a === '04d') return 'cloudy-weather-day'
@@ -122,9 +120,7 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
 
   if (map.map !== undefined) {
     const center = map.map.getView().getCenter()
-    // if (map.map === 'kappa') {
     const cityCoord = fromLonLat([coord.lon, coord.lat])
-    // console.log(coord, cityCoord, center)
 
     // add layer with searched place
     if (center[0] !== cityCoord[0]) {
@@ -287,7 +283,6 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
           <div className="time-of-measure">(Stan na: {new Date(dt * 1000).toLocaleDateString()} - {new Date(dt * 1000).toLocaleTimeString()})</div>
         </div>
         {!city.d5Open && <button className='d5-day-forecast-button' onClick={() => getD5CityForecast(city.city)}>Pokaż pogodę 5dniową</button>}
-        {/* {city.d5Open && <D5Forecast />} */}
 
       </div>
 
