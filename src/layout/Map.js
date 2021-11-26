@@ -27,7 +27,7 @@ import { defaults } from 'ol/interaction';
 
 import URLwoj from '../geojson/wojewodztwa_wgs84.geojson'
 import URLcap from '../geojson/stolice_wgs84.geojson'
-import hipso from '../images/hipsometria.png'
+import hipso from '../images/hipsometria.webp'
 
 const MapCont = ({ capitals, getCapitalForecast, setMapObject, city }) => {
   const [isFetched, setIsFetched] = React.useState(false)

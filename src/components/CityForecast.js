@@ -13,18 +13,18 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 
 
-import day from '../images/day.jpg'
-import night from '../images/night.jpg'
-import cloudsDay from '../images/clouds_day.png'
-import cloudsNight from '../images/clouds_night.png'
-import bubble1 from '../images/rain_bubble_1.png'
-import bubble2 from '../images/rain_bubble_2.png'
-import bubble3 from '../images/rain_bubble_3.png'
-import bubble4 from '../images/rain_bubble_4.png'
-import bubble5 from '../images/rain_bubble_5.png'
+import day from '../images/day.webp'
+import night from '../images/night.webp'
+import cloudsDay from '../images/clouds_day.webp'
+import cloudsNight from '../images/clouds_night.webp'
+import bubble1 from '../images/rain_bubble_1.webp'
+import bubble2 from '../images/rain_bubble_2.webp'
+import bubble3 from '../images/rain_bubble_3.webp'
+import bubble4 from '../images/rain_bubble_4.webp'
+import bubble5 from '../images/rain_bubble_5.webp'
 // import rain from '../images/rain_lines.png'
-import snow from '../images/snow.png'
-import fog from '../images/fog.png'
+import snow from '../images/snow.webp'
+import fog from '../images/fog.webp'
 
 
 const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {

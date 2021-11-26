@@ -328,7 +328,7 @@
 
 .rain-weather,
 .storm-weather {
-  background-image: url('../images/rain_lines.png');
+  background-image: url('../images/rain_lines.webp');
   /* background-size: cover; */
   /* background-repeat: no-repeat; */
   animation: rain 1s infinite linear;
@@ -821,7 +821,7 @@
 
   .App {
     background-color: #fff;
-    background-image: url(../images/Frame1.png);
+    background-image: url(../images/Frame1.webp);
     background-repeat: no-repeat;
     background-position: 100% 0;
     background-size: 70% 100%;
