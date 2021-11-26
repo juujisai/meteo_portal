@@ -1,5 +1,6 @@
 import axios from 'axios'
-import API_KEY from '../../key'
+// import API_KEY from '../../key'
+const API_KEY = process.env.REACT_APP_API_KEY
 
 
 export const GET_FORECAST_FOR_CITY = 'GET_FORECAST_FOR_CITY'
