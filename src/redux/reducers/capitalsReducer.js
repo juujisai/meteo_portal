@@ -65,11 +65,6 @@ export const capitalsReducer = (state = capitalsInitialStore, action) => {
   if (action.type === FETCH_CAPITALS_FORECAST_SUCCESS) {
     // console.log('success')
     const { capitalsForecast } = action.payload
-    // console.log(capitalsForecast)
-
-    // setStyle(capitalsForecast, layer, cell)
-
-    // console.log(capitalsForecast)
 
     return {
       ...state,
@@ -88,7 +83,7 @@ export const capitalsReducer = (state = capitalsInitialStore, action) => {
   }
 
   if (action.type === GET_FORECAST_FOR_CAPITALS) {
-    console.log('kek')
+    // console.log('kek')
   }
 
   return state

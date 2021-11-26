@@ -220,13 +220,7 @@ const MapCont = ({ capitals, getCapitalForecast, setMapObject, city }) => {
       setMapObject(map)
 
     }
-    // if (city.isOpen) {
-    //   map.updateSize()
 
-    // }
-    // console.log(layerCapitals)
-    // console.log('isFetched:', isFetched, capitals.capitalForecast)
-    // console.log(capitals.loading)
   }, [getCapitalForecast, isFetched, capitals, setMapObject])
 
   return capitals.loading ?
@@ -237,9 +231,6 @@ const MapCont = ({ capitals, getCapitalForecast, setMapObject, city }) => {
     (
       <>
         <div id='map' ></div>
-
-
-        {/* // <div id='map' className={city.isOpen && window.innerWidth >= 1024 ? 'forecast-open' : null}></div> */}
 
         {city.d5Open && <D5Forecast />}
       </>
@@ -252,7 +243,6 @@ const mapStateToProps = ({ capitals, city }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // forecastCap: (capitals) => dispatch(getForecastForCapitals(capitals)),
     getCapitalForecast: (data) => dispatch(getForecastForCapitals(data)),
     setMapObject: (data) => dispatch(setMapObject(data))
   }

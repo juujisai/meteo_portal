@@ -1,7 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux'
-// import test from '../testData/testForeCastData'
-// import D5Forecast from '../components/D5Forecast'
 import { ImArrowUp } from 'react-icons/im'
 import { IoCloseSharp } from 'react-icons/io5'
 import { FiSunrise, FiSunset } from 'react-icons/fi'
@@ -30,29 +28,18 @@ import fog from '../images/fog.png'
 
 
 const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
-  // const [isOpen, setIsOpen] = React.useState(isForecastOpen)
-  // const [isOpen, setIsOpen] = React.useState(false)
   const [numberOfBubbles, setNumberOfBubbles] = React.useState([])
-  // const [forecast, setForecast] = React.useState([])
-  // const [forecast, setForecast] = React.useState({ city: 'kekw', forecast: test })
+
 
   const handleClick = () => {
     closeCityForecast()
-    // document.getElementById('map').style.filter = 'brightness(0)'
-    // document.getElementById('map').style.filter = 'url("../images/daw.png")'
 
-
-    // document.getElementById('map').classList.remove('forecast-open')
-    // setTimeout(function () {
-    //   document.getElementById('map').style.filter = 'brightness(1)'
 
     map.map.getView().fit(
       [1572152.3511472388636321, 6275208.6524272579699755, 2687896.2767138490453362, 7330182.4313131291419268]
       , {
         padding: [10, 10, 10, 10]
       })
-    //   map.map.updateSize();
-    // }, 500);
 
   }
 
@@ -139,8 +126,6 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
     const cityCoord = fromLonLat([coord.lon, coord.lat])
     // console.log(coord, cityCoord, center)
 
-
-    // console.log(center[0] === cityCoord[0])
     // add layer with searched place
     if (center[0] !== cityCoord[0]) {
       const markerStyle = new Style({

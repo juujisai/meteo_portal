@@ -57,7 +57,6 @@ export const getForecastForCity = (data) => {
     axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${data}&appid=${API_KEY}&units=metric&lang=pl`)
       // axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
       .then(response => {
-        // console.log(response)
         // console.log('response city')
         const forecast = { name: data, forecast: response.data }
         // const forecast = {
@@ -257,11 +256,7 @@ export const getD5CityForecast = (data) => {
           }
         })
 
-        // console.log(forecast.tempMax, forecast.tempMin)
-
         // console.log('response 5d')
-        // const response = ['kekw']
-        // const forecast = ['kekw']
         dispatch(fetchD5CityForecastSuccess(forecast))
       })
       .catch(error => {
