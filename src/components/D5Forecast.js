@@ -172,7 +172,7 @@ const D5Forecast = ({ city, closeD5Forecast }) => {
       }
 
 
-      const myChart = new Chart(ctx, {
+      new Chart(ctx, {
         data: data,
         options: options,
 

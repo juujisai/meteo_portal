@@ -1,6 +1,6 @@
 import React from 'react';
 import { BiSearchAlt } from 'react-icons/bi'
-import { GoLocation } from 'react-icons/go'
+// import { GoLocation } from 'react-icons/go'
 
 import { connect } from 'react-redux'
 
