@@ -2,10 +2,10 @@ import { GET_FORECAST_FOR_CAPITALS, FETCH_CAPITALS_FORECAST_REQUEST, FETCH_CAPIT
 
 
 
-import { Style } from 'ol/style'
+// import { Style } from 'ol/style'
 
-import Icon from 'ol/style/Icon'
-import Text from 'ol/style/Text'
+// import Icon from 'ol/style/Icon'
+// import Text from 'ol/style/Text'
 
 
 
