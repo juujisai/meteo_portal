@@ -48,7 +48,7 @@ export const fetchCityForecastFailure = (error) => {
 
 export const getForecastForCity = (data) => {
   return (dispatch) => {
-    console.log('city forecast', data)
+    // console.log('city forecast', data)
     dispatch(fetchCityForecastRequest(true))
 
 
@@ -58,7 +58,7 @@ export const getForecastForCity = (data) => {
       // axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
       .then(response => {
         // console.log(response)
-        console.log('response city')
+        // console.log('response city')
         const forecast = { name: data, forecast: response.data }
         // const forecast = {
         //   name: data,
@@ -259,7 +259,7 @@ export const getD5CityForecast = (data) => {
 
         // console.log(forecast.tempMax, forecast.tempMin)
 
-        console.log('response 5d')
+        // console.log('response 5d')
         // const response = ['kekw']
         // const forecast = ['kekw']
         dispatch(fetchD5CityForecastSuccess(forecast))

@@ -30,7 +30,7 @@ const Tools = ({ city, getForecastForCity, map }) => {
       <div className="tools-tools">
         <input type="text" placeholder='wpisz miejscowość ...' value={cityValue} onChange={(e) => setCityValue(e.target.value)} />
         <button onClick={handleSearch} disabled={cityValue === '' ? true : false}><BiSearchAlt /></button>
-        <button><GoLocation /></button>
+        {/* <button><GoLocation /></button> */}
       </div>
 
     </div>
