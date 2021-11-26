@@ -43,7 +43,7 @@ export const getForecastForCapitals = (data) => {
 
     data.featuresValue.forEach(item => {
       // console.log('pobieram')
-      axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${item}&appid=${API_KEY}&units=metric&lang=pl`)
+      axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${item}&appid=${API_KEY}&units=metric&lang=pl`)
         // axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
         .then(response => {
           // console.log('response')

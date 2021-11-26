@@ -54,7 +54,7 @@ export const getForecastForCity = (data) => {
 
     // console.log('pobieram')
 
-    axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${data}&appid=${API_KEY}&units=metric&lang=pl`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${data}&appid=${API_KEY}&units=metric&lang=pl`)
       // axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
       .then(response => {
         // console.log('response city')
@@ -153,7 +153,7 @@ export const getD5CityForecast = (data) => {
   return (dispatch) => {
     dispatch(fetchD5CityForecastRequest(true))
 
-    axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${data}&appid=${API_KEY}&units=metric&lang=pl`)
+    axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${data}&appid=${API_KEY}&units=metric&lang=pl`)
       // axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
       .then(response => {
         // console.log('response d5')
