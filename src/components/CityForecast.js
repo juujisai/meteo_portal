@@ -17,17 +17,17 @@ import day from '../images/day.webp'
 import night from '../images/night.webp'
 import cloudsDay from '../images/clouds_day.webp'
 import cloudsNight from '../images/clouds_night.webp'
-import bubble1 from '../images/rain_bubble_1.webp'
-import bubble2 from '../images/rain_bubble_2.webp'
-import bubble3 from '../images/rain_bubble_3.webp'
-import bubble4 from '../images/rain_bubble_4.webp'
-import bubble5 from '../images/rain_bubble_5.webp'
+// import bubble1 from '../images/rain_bubble_1.webp'
+// import bubble2 from '../images/rain_bubble_2.webp'
+// import bubble3 from '../images/rain_bubble_3.webp'
+// import bubble4 from '../images/rain_bubble_4.webp'
+// import bubble5 from '../images/rain_bubble_5.webp'
 import snow from '../images/snow.webp'
 import fog from '../images/fog.webp'
 
 
 const CityForecast = ({ capitals, city, closeCityForecast, getD5CityForecast, map }) => {
-  const [numberOfBubbles, setNumberOfBubbles] = React.useState([])
+  // const [numberOfBubbles, setNumberOfBubbles] = React.useState([])
 
 
   const handleClick = () => {
@@ -42,25 +42,25 @@ const CityForecast = ({ capitals, city, closeCityForecast, getD5CityForecast, ma
 
   }
 
-  let rainTypes = [bubble1, bubble2, bubble3, bubble4, bubble5]
+  // let rainTypes = [bubble1, bubble2, bubble3, bubble4, bubble5]
 
-  let f = numberOfBubbles.map((item, id) => {
+  // let f = numberOfBubbles.map((item, id) => {
 
-    return (
-      <img key={id} id='raindrop' src={rainTypes[item.r]} alt="Kropla deszczu" style={{
-        position: 'absolute',
-        left: `${item.x}%`,
-        top: `${item.y}%`,
-        filter: ''
-      }} />
-    )
-  }
+  //   return (
+  //     <img key={id} id='raindrop' src={rainTypes[item.r]} alt="Kropla deszczu" style={{
+  //       position: 'absolute',
+  //       left: `${item.x}%`,
+  //       top: `${item.y}%`,
+  //       filter: ''
+  //     }} />
+  //   )
+  // }
 
 
 
-  )
+  // )
   React.useEffect(() => {
-    let interval;
+    // let interval;
 
     if (city.isOpen) {
 
@@ -91,7 +91,8 @@ const CityForecast = ({ capitals, city, closeCityForecast, getD5CityForecast, ma
       //     }
     }
     //   return () => clearInterval(interval)
-  }, [city, numberOfBubbles])
+    // }, [city, numberOfBubbles])
+  }, [city])
 
 
   if (!city.isOpen) {
@@ -239,7 +240,7 @@ const CityForecast = ({ capitals, city, closeCityForecast, getD5CityForecast, ma
         </div>}
         {weatherF(whichIcon) === 'rain-weather' && <div className='weather-cont rain-weather'>
           <img src={cloudsDay} alt="Chmury w dzień" />
-          {f}
+          {/* {f} */}
         </div>}
         {weatherF(whichIcon) === 'fog-weather' && <div className="weather-cont fog-weather">
           <div>
