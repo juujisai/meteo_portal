@@ -22,10 +22,10 @@ export const fetchCapitalsForecastRequest = (loading) => {
     payload: loading,
   }
 }
-export const fetchCapitalsForecastSuccess = (capitalsForecast, layer, cell) => {
+export const fetchCapitalsForecastSuccess = (capitalsForecast, layer, cell, capitals) => {
   return {
     type: FETCH_CAPITALS_FORECAST_SUCCESS,
-    payload: { capitalsForecast, layer, cell }
+    payload: { capitalsForecast, layer, cell, capitals }
   }
 }
 export const fetchCapitalsForecastFailure = (error) => {
@@ -49,7 +49,7 @@ export const getForecastForCapitals = (data) => {
           const forecast = response.data
           capitalsForecast = [...capitalsForecast, { name: item, forecast }]
 
-          data.featuresValue.length === capitalsForecast.length && dispatch(fetchCapitalsForecastSuccess(capitalsForecast, data.layer, data.cell))
+          data.featuresValue.length === capitalsForecast.length && dispatch(fetchCapitalsForecastSuccess(capitalsForecast, data.layer, data.cell, data.featuresValue))
 
 
         })

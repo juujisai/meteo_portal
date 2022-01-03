@@ -26,7 +26,7 @@ import snow from '../images/snow.webp'
 import fog from '../images/fog.webp'
 
 
-const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
+const CityForecast = ({ capitals, city, closeCityForecast, getD5CityForecast, map }) => {
   const [numberOfBubbles, setNumberOfBubbles] = React.useState([])
 
 
@@ -66,31 +66,31 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
 
 
 
-      let a = city.forecast.weather[0].icon
+      //     let a = city.forecast.weather[0].icon
 
-      if (a === '09d' || a === '09n' || a === '10d' || a === '10n') {
+      //     if (a === '09d' || a === '09n' || a === '10d' || a === '10n') {
 
 
 
-        interval = setInterval(() => {
+      //       interval = setInterval(() => {
 
-          const x = Math.floor(Math.random() * 100)
-          const y = Math.floor(Math.random() * 100)
-          const r = Math.floor(Math.random() * 5)
-          let b = numberOfBubbles
+      //         const x = Math.floor(Math.random() * 100)
+      //         const y = Math.floor(Math.random() * 100)
+      //         const r = Math.floor(Math.random() * 5)
+      //         let b = numberOfBubbles
 
-          if (b.length < 100) {
+      //         if (b.length < 100) {
 
-            b = [...b, { x, y, r }]
-          } else {
-            clearInterval(interval)
-          }
+      //           b = [...b, { x, y, r }]
+      //         } else {
+      //           clearInterval(interval)
+      //         }
 
-          setNumberOfBubbles(b)
-        }, 400)
-      }
+      //         setNumberOfBubbles(b)
+      //       }, 400)
+      //     }
     }
-    return () => clearInterval(interval)
+    //   return () => clearInterval(interval)
   }, [city, numberOfBubbles])
 
 
@@ -122,6 +122,10 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
     const center = map.map.getView().getCenter()
     const cityCoord = fromLonLat([coord.lon, coord.lat])
 
+
+    let previousCities = [...capitals.capitals, ...city.previousCities]
+    // console.log(previousCities)
+
     // add layer with searched place
     if (center[0] !== cityCoord[0]) {
       const markerStyle = new Style({
@@ -140,21 +144,22 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
         })
       })
 
+      if (previousCities.filter(item => item === city.city).length === 0) {
 
-      let positionMarker = new Feature()
-      positionMarker.setStyle(markerStyle)
+        let positionMarker = new Feature()
+        positionMarker.setStyle(markerStyle)
 
-      positionMarker.setGeometry(cityCoord.length === 2 ? new Point(cityCoord) : null)
+        positionMarker.setGeometry(cityCoord.length === 2 ? new Point(cityCoord) : null)
 
-      const markerLayer = new VectorLayer({
-        source: new VectorSource({
-          features: [positionMarker]
-        }),
-        visible: true
-      })
+        const markerLayer = new VectorLayer({
+          source: new VectorSource({
+            features: [positionMarker]
+          }),
+          visible: true
+        })
 
-      map.map.addLayer(markerLayer)
-
+        map.map.addLayer(markerLayer)
+      }
 
       // animate to the location
 
@@ -205,6 +210,7 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
 
       flyTo(cityCoord, function () { })
     }
+
   }
 
 
@@ -290,8 +296,8 @@ const CityForecast = ({ city, closeCityForecast, getD5CityForecast, map }) => {
   );
 }
 
-const mapStateToProps = ({ city, map }) => {
-  return { city, map }
+const mapStateToProps = ({ city, map, capitals }) => {
+  return { city, map, capitals }
 }
 const mapDispatchToProps = (dispatch) => {
   return {

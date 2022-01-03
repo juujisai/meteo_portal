@@ -19,13 +19,14 @@ export const capitalsReducer = (state = capitalsInitialStore, action) => {
   }
   if (action.type === FETCH_CAPITALS_FORECAST_SUCCESS) {
     // console.log('success')
-    const { capitalsForecast } = action.payload
+    const { capitalsForecast, capitals } = action.payload
 
     return {
       ...state,
       loading: false,
       capitalForecast: capitalsForecast,
-      error: ''
+      error: '',
+      capitals
     }
   }
   if (action.type === FETCH_CAPITALS_FORECAST_FAILURE) {

@@ -1,6 +1,7 @@
 import { FETCH_CITY_FORECAST_REQUEST, FETCH_CITY_FORECAST_SUCCESS, FETCH_CITY_FORECAST_FAILURE, CLOSE_CITY_FORECAST, FETCH_D5_CITY_FORECAST_REQUEST, FETCH_D5_CITY_FORECAST_SUCCESS, FETCH_D5_CITY_FORECAST_FAILURE, CLOSE_D5_FORECAST } from '../actions/cityForecastAction'
 
 const cityForecastInitialState = {
+  previousCities: [],
   city: '',
   forecast: {},
   loading: false,
@@ -30,6 +31,7 @@ export const cityForecastReducer = (state = cityForecastInitialState, action) =>
   }
   if (action.type === FETCH_CITY_FORECAST_SUCCESS) {
     // console.log('success city')
+
     return { ...state, city: action.payload.name, forecast: action.payload.forecast, loading: false, isOpen: true }
   }
   if (action.type === FETCH_CITY_FORECAST_FAILURE) {
@@ -38,7 +40,9 @@ export const cityForecastReducer = (state = cityForecastInitialState, action) =>
   }
   if (action.type === CLOSE_CITY_FORECAST) {
     // console.log('closing city forecast')
-    return { ...state, isOpen: false, forecast: {}, city: '' }
+    const previousCities = [...state.previousCities, state.city]
+
+    return { ...state, previousCities, isOpen: false, forecast: {}, city: '' }
   }
 
   // 5d forecast
